@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePayslipsTable extends Migration
+class CreateApplyLeavesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,21 +13,22 @@ class CreatePayslipsTable extends Migration
      */
     public function up()
     {
-        Schema::create('payslips', function (Blueprint $table) {
-            $table->string('payslip_id',10);
-            $table->string('admin_id');
+        Schema::create('apply_leaves', function (Blueprint $table) {
+            $table->id('leave_id');
             $table->unsignedBigInteger('intern_id');
-            $table->double('amount');
-
-            $table->primary('payslip_id');
-
-            $table->foreign('admin_id')
-                  ->references('admin_id')
-                  ->on('admins');
+            $table->string('admin_id');
+            $table->date('start_date');
+            $table->date('end_date');
+            $table->string('remark',255);
+            $table->string('status',15);
 
             $table->foreign('intern_id')
                   ->references('intern_id')
                   ->on('interns');
+            
+            $table->foreign('admin_id')
+                  ->references('admin_id')
+                  ->on('admins');
         });
     }
 
@@ -38,6 +39,6 @@ class CreatePayslipsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('payslips');
+        Schema::dropIfExists('apply_leaves');
     }
 }

@@ -14,12 +14,10 @@ class CreateAnnouncementsTable extends Migration
     public function up()
     {
         Schema::create('announcements', function (Blueprint $table) {
-            $table->increments('announcement_id');
+            $table->id('announcement_id');
             $table->string('admin_id');
             $table->string('announcement_title',100);
             $table->string('announcement_description',255);
-
-            $table->primary('announcement_id');
 
             $table->foreign('admin_id')
                   ->references('admin_id')

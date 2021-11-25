@@ -14,15 +14,13 @@ class CreateImprovementsTable extends Migration
     public function up()
     {
         Schema::create('improvements', function (Blueprint $table) {
-            $table->string('improvement_id',10);
-            $table->string('faq_id');
+            $table->id('improvement_id');
+            $table->unsignedBigInteger('faq_id');
             $table->string('description',255);
-
-            $table->primary('improvement_id');
 
             $table->foreign('faq_id')
                   ->references('faq_id')
-                  ->on('description');
+                  ->on('FAQs');
         });
     }
 

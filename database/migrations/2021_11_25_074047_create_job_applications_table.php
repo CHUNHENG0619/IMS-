@@ -16,7 +16,7 @@ class CreateJobApplicationsTable extends Migration
         Schema::create('job_applications', function (Blueprint $table) {
             $table->string('apply_id',10);
             $table->string('job_id');
-            $table->string('intern_Id');
+            $table->unsignedBigInteger('intern_id');
             $table->string('admin_id');
             $table->date('apply_date');
             $table->string('status',10);
