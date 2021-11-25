@@ -14,7 +14,7 @@ class CreateCalendarToDoListsTable extends Migration
     public function up()
     {
         Schema::create('calendar_to_do_lists', function (Blueprint $table) {
-            $table->increments('calendar_task_id');
+            $table->id('calendar_to_do_lists_id');
             $table->string('user_id');
             $table->string('description',255);
             $table->string('title',255);
@@ -23,8 +23,6 @@ class CreateCalendarToDoListsTable extends Migration
             $table->dateTime('start_time');
             $table->string('deadline');
             $table->timestamps();
-
-            $table->primary('calendar_task_id');
 
             $table->foreign('user_id')
                   ->references('user_id')
