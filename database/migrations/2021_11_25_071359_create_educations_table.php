@@ -14,18 +14,16 @@ class CreateEducationsTable extends Migration
     public function up()
     {
         Schema::create('educations', function (Blueprint $table) {
-            $table->integer('edu_id');
-            $table->string('intern_id');
+            $table->id('edu_id');
+            $table->unsignedBigInteger('intern_detail_id');
             $table->string('current_edu_level',30);
             $table->string('current_edu_institution',30);
             $table->string('current_institution_location',30);
             $table->string('study_field',30);
             $table->string('grad_period',30);
 
-            $table->primary('edu_id');
-
-            $table->foreign('intern_id')
-                  ->references('intern_id')
+            $table->foreign('intern_detail_id')
+                  ->references('intern_detail_id')
                   ->on('intern_details');
         });
     }
