@@ -6,18 +6,13 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateInternsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('interns', function (Blueprint $table) {
-            $table->integer('interns_id');
+            $table->id('interns_id');
             $table->string('intern_name',255);
             $table->string('intern_department',30);
-            $table->string('intern_email',20);
+            $table->string('intern_email',20)->unique();
             $table->string('intern_phone',15);
             $table->timestamps();
 
@@ -25,11 +20,6 @@ class CreateInternsTable extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('interns');
