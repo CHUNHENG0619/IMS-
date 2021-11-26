@@ -18,10 +18,10 @@ class CreateInternDetailsTable extends Migration
             $table->unsignedBigInteger('intern_id');
             $table->date('time_to_start');
             $table->date('time_to_end');
-            $table->string('resume',30);
-            $table->string('text',255);
+            $table->string('resume',255);
+            $table->text('text');
             $table->string('state',30);
-            $table->string('status',10);
+            $table->string('status',20);
             $table->dateTime('time_to_update');
             $table->dateTime('time_to_post');
             $table->timestamps();

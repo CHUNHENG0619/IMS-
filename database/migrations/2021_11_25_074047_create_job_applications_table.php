@@ -14,15 +14,13 @@ class CreateJobApplicationsTable extends Migration
     public function up()
     {
         Schema::create('job_applications', function (Blueprint $table) {
-            $table->string('apply_id',10);
-            $table->string('job_id');
+            $table->id('apply_id');
+            $table->unsignedBigInteger('job_id');
             $table->unsignedBigInteger('intern_id');
-            $table->string('admin_id');
+            $table->unsignedBigInteger('admin_id');
             $table->date('apply_date');
-            $table->string('status',10);
+            $table->string('status',20);
             $table->timestamps();
-
-            $table->primary('apply_id');
 
             $table->foreign('job_id')
                   ->references('job_id')

@@ -6,37 +6,29 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateAssignTasksTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('assign_tasks', function (Blueprint $table) {
-            $table->string('task_id',10);
-            $table->string('staff_id');
-            $table->string('intern_id');
-            $table->string('task_title',100);
-            $table->string('task_description',100);
-            $table->string('task_status',10);
+            $table->id('task_id');
+            $table->unsignedBigInteger('intern_id');
+            $table->unsignedBigInteger('staff_id');            
+            $table->string('task_title',255);
+            $table->text('task_description');
+            $table->string('task_status',20);
             $table->dateTime('start_time');
             $table->dateTime('deadline');
             $table->timestamps();
 
-            $table->primary('task_id');
-
             $table->foreign('staff_id')
                   ->references('staff_id')
-                  ->on('staffs');            
+                  ->on('staffs');  
+                  
+            $table->foreign('intern_id')
+                  ->references('intern_id')
+                  ->on('interns');    
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('assign_tasks');

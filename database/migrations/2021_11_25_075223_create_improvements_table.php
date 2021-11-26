@@ -16,7 +16,7 @@ class CreateImprovementsTable extends Migration
         Schema::create('improvements', function (Blueprint $table) {
             $table->id('improvement_id');
             $table->unsignedBigInteger('faq_id');
-            $table->string('description',255);
+            $table->text('description');
             $table->timestamps();
 
             $table->foreign('faq_id')

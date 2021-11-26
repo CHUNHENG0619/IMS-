@@ -14,13 +14,11 @@ class CreatePayslipsTable extends Migration
     public function up()
     {
         Schema::create('payslips', function (Blueprint $table) {
-            $table->string('payslip_id',10);
-            $table->string('admin_id');
+            $table->id('payslip_id');
+            $table->unsignedBigInteger('admin_id');
             $table->unsignedBigInteger('intern_id');
             $table->double('amount');
             $table->timestamps();
-
-            $table->primary('payslip_id');
 
             $table->foreign('admin_id')
                   ->references('admin_id')

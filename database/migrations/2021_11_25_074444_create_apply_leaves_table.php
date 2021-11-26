@@ -16,11 +16,11 @@ class CreateApplyLeavesTable extends Migration
         Schema::create('apply_leaves', function (Blueprint $table) {
             $table->id('leave_id');
             $table->unsignedBigInteger('intern_id');
-            $table->string('admin_id');
+            $table->unsignedBigInteger('admin_id');
             $table->date('start_date');
             $table->date('end_date');
             $table->string('remark',255);
-            $table->string('status',15);
+            $table->string('status',20);
             $table->timestamps();
 
             $table->foreign('intern_id')

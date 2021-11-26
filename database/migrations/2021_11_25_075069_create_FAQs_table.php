@@ -10,16 +10,11 @@ class CreateFAQsTable extends Migration
     {
         Schema::create('FAQs', function (Blueprint $table) {
            $table->id('faq_id');
-           $table->unsignedBigInteger('category_id');
-           $table->string('title',20);
-           $table->string('content',255);
+           $table->string('title',255);
+           $table->text('content');
            $table->string('pic',255);
-           $table->string('helpful',10);
+           $table->boolean('helpful');
            $table->timestamps();
-
-           $table->foreign('category_id')
-                 ->references('category_id')
-                 ->on('FAQ_categories');
         });
     }
 

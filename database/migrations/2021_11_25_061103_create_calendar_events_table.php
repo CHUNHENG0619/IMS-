@@ -14,7 +14,7 @@ class CreateCalendarEventsTable extends Migration
             $table->string('event_title',255);
             $table->char('type_of_event',1);
             $table->dateTime('event_date');
-            $table->string('event_description',255);
+            $table->text('event_description');
             $table->string('attachment',255);
             $table->string('location',255);
             $table->json('involved_member');
