@@ -16,8 +16,8 @@ class CreateCalendarToDoListsTable extends Migration
         Schema::create('calendar_to_do_lists', function (Blueprint $table) {
             $table->id('calendar_to_do_lists_id');
             $table->string('user_id');
-            $table->text('description');
             $table->string('title',255);
+            $table->text('description');            
             $table->char('task_color',1);
             $table->string('task_status',20);
             $table->dateTime('start_time');
