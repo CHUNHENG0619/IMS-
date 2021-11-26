@@ -15,6 +15,7 @@ class CreateFAQsTable extends Migration
            $table->string('content',255);
            $table->string('pic',255);
            $table->string('helpful',10);
+           $table->timestamps();
 
            $table->foreign('category_id')
                  ->references('category_id')

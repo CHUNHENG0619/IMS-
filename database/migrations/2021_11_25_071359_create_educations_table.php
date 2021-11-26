@@ -21,6 +21,7 @@ class CreateEducationsTable extends Migration
             $table->string('current_institution_location',30);
             $table->string('study_field',30);
             $table->string('grad_period',30);
+            $table->timestamps();
 
             $table->foreign('intern_detail_id')
                   ->references('intern_detail_id')

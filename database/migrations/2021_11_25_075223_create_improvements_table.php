@@ -17,6 +17,7 @@ class CreateImprovementsTable extends Migration
             $table->id('improvement_id');
             $table->unsignedBigInteger('faq_id');
             $table->string('description',255);
+            $table->timestamps();
 
             $table->foreign('faq_id')
                   ->references('faq_id')

@@ -21,6 +21,7 @@ class CreateApplyLeavesTable extends Migration
             $table->date('end_date');
             $table->string('remark',255);
             $table->string('status',15);
+            $table->timestamps();
 
             $table->foreign('intern_id')
                   ->references('intern_id')

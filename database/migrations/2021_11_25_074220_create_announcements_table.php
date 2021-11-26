@@ -18,6 +18,7 @@ class CreateAnnouncementsTable extends Migration
             $table->string('admin_id');
             $table->string('announcement_title',100);
             $table->string('announcement_description',255);
+            $table->timestamps();
 
             $table->foreign('admin_id')
                   ->references('admin_id')

@@ -18,6 +18,7 @@ class CreatePayslipsTable extends Migration
             $table->string('admin_id');
             $table->unsignedBigInteger('intern_id');
             $table->double('amount');
+            $table->timestamps();
 
             $table->primary('payslip_id');
 
