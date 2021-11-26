@@ -21,7 +21,8 @@ class CreateImprovementsTable extends Migration
 
             $table->foreign('faq_id')
                   ->references('faq_id')
-                  ->on('FAQs');
+                  ->on('FAQs')
+                  ->onDelete('cascade');
         });
     }
 

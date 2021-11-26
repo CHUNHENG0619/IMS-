@@ -28,7 +28,8 @@ class CreateInternDetailsTable extends Migration
 
             $table->foreign('intern_id')
                   ->references('intern_id')
-                  ->on('interns');
+                  ->on('interns')
+                  ->onDelete('cascade');
         });
     }
 

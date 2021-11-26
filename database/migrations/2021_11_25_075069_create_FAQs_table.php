@@ -13,6 +13,7 @@ class CreateFAQsTable extends Migration
            $table->string('title',255);
            $table->text('content');
            $table->string('pic',255);
+           $table->string('category',255);
            $table->boolean('helpful');
            $table->timestamps();
         });
