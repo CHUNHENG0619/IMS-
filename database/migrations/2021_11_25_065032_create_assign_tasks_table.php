@@ -21,8 +21,7 @@ class CreateAssignTasksTable extends Migration
 
             $table->foreign('staff_id')
                   ->references('staff_id')
-                  ->on('staffs')
-                  ->onDelete('cascade');  
+                  ->on('staffs');
                   
             $table->foreign('intern_id')
                   ->references('intern_id')
