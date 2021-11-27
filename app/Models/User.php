@@ -41,4 +41,29 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function calendartodolists()
+    {
+        return $this->hasMany(CalendarToDoList::class);
+    }
+
+    public function calendarevents()
+    {
+        return $this->hasMany(CalendarEvent::class);
+    }
+
+    public function staffs()
+    {
+        return $this->hasOne(Staff::class);
+    }
+
+    public function admins()
+    {
+        return $this->hasOne(Admin::class);
+    }
+
+    public function interns()
+    {
+        return $this->hasOne(Intern::class);
+    }
 }

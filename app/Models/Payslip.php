@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Payslip extends Model
 {
     use HasFactory;
+
+    protected $table = "payslips";
+
+    public function admins(){
+        return $this->belongsTo(Admin::class);
+    }
+
+    public function interns(){
+        return $this->belongsTo(Intern::class);
+    }
 }

@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class CalendarToDoList extends Model
 {
     use HasFactory;
+
+    protected $table = "calendar_to_do_lists";
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }

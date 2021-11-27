@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class FAQ extends Model
 {
     use HasFactory;
+
+    protected $table = "FAQs";
+
+    public function improvements()
+    {
+        return $this->hasMany(Improvement::class);
+    }
 }

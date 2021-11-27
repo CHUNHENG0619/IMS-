@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Department extends Model
 {
     use HasFactory;
+
+    protected $table = "departments";
+
+    public function staffs(){
+        return $this->belongsToMany(Staff::class);
+    }
 }
