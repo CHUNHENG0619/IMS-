@@ -11,6 +11,11 @@ class CalendarEvent extends Model
 
     protected $table = "calendar_events";
 
+    // involved member (JSON) & attachment (string path) will ne currently nullable now for faker
+
+    protected $fillable = ['calendar_event_id','user_id','event_title','type_of_event','event_date','event_description',
+                           'location','meet_link'];
+
     public function user(){
         return $this->belongsToMany(User::class);
     }

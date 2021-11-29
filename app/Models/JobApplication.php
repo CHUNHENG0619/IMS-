@@ -11,6 +11,8 @@ class JobApplication extends Model
 
     protected $table = "job_applications";
 
+    protected $fillable = ['apply_id','job_id','intern_id','admin_id','apply_date','status'];
+
     public function admins(){
         return $this->belongsTo(Admin::class);
     }

@@ -11,13 +11,15 @@ class Staff extends Model
 
     protected $table = "staffs";
 
+    protected $fillable = ['staff_id','user_id','department_id'];
+
     public function user(){
         return $this->belongsTo(User::class);
     }
 
     public function departments()
     {
-        return $this->hasOne(Department::class);
+        return $this->belongsTo(Department::class);
     }
 
     public function assigntasks()

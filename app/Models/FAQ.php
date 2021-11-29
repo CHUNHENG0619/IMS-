@@ -11,6 +11,10 @@ class FAQ extends Model
 
     protected $table = "FAQs";
 
+    // pic is currently null for faker
+
+    protected $fillable = ['faq_id','title','content','category','helpful'];
+
     public function improvements()
     {
         return $this->hasMany(Improvement::class);

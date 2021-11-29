@@ -11,7 +11,9 @@ class Department extends Model
 
     protected $table = "departments";
 
+    protected $fillable = ['department_id','address','office_phone','department_name'];
+
     public function staffs(){
-        return $this->belongsToMany(Staff::class);
+        return $this->hasMany(Staff::class);
     }
 }

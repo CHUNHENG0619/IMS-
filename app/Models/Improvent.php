@@ -11,6 +11,8 @@ class Improvent extends Model
 
     protected $table = "improvements";
 
+    protected $fillable = ['improvement_id','faq_id','description'];
+
     public function FAQs(){
         return $this->belongsTo(FAQ::class);
     }

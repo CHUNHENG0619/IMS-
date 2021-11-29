@@ -10,4 +10,6 @@ class ContactUs extends Model
     use HasFactory;
 
     protected $table = "contact_us";
+
+    protected $fillable = ['contact_id','name','email','subject','message'];
 }

@@ -11,6 +11,9 @@ class AssignTask extends Model
 
     protected $table = "assign_tasks";
 
+    protected $fillable = ['task_id','staff_id','intern_id','task_title','task_description','task_status'
+                           ,'start_time','deadline'];
+
     public function staffs(){
         return $this->belongsTo(Staff::class);
     }

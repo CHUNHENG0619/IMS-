@@ -11,6 +11,8 @@ class Announcement extends Model
 
     protected $table = "announcements";
 
+    protected $fillable = ['announcement_id','admin_id','announcement_title','announcement_description'];
+
     public function admins(){
         return $this->belongsTo(Admin::class);
     }

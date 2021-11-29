@@ -11,6 +11,8 @@ class Payslip extends Model
 
     protected $table = "payslips";
 
+    protected $fillable = ['payslip_id','admin_id','intern_id','amount'];
+
     public function admins(){
         return $this->belongsTo(Admin::class);
     }

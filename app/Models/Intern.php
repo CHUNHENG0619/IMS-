@@ -11,6 +11,9 @@ class Intern extends Model
 
     protected $table = "interns";
 
+    protected $fillable = ['intern_id','intern_name','intern_department','intern_email'
+                          ,'intern_phone'];
+
     public function user(){
         return $this->belongsTo(User::class);
     }

@@ -11,6 +11,9 @@ class Job extends Model
 
     protected $table = "jobs";
 
+    protected $fillable = ['job_id','admin_id','job_title','job_desc','job_requirement','job_type'
+                          ,'job_location','salary','start_date','end_date'];
+
     public function admins(){
         return $this->belongsTo(Admin::class);
     }
