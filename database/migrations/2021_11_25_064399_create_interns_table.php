@@ -13,7 +13,7 @@ class CreateInternsTable extends Migration
             $table->string('user_id');
             $table->string('intern_name',255);
             $table->string('intern_department',255);
-            $table->string('intern_email',30)->unique();
+            $table->string('intern_email',60)->unique();
             $table->string('intern_phone',20);
             $table->timestamps();
 

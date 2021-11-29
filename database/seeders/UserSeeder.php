@@ -38,7 +38,7 @@ class UserSeeder extends Seeder
 {
     public function run()
     {
-        $faker = \Faker\Factory::create();
+        $faker = \Faker\Factory::create();        
        
         for ($i=0;$i<50;$i++){
             User::create([
