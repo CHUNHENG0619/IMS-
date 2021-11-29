@@ -12,6 +12,8 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    public $incrementing = false;
+
     protected $fillable = [
         'user_id','email','password','name','IP_address','address',
         'phone','role','user_type','recovery_email','registration_time'
@@ -35,7 +37,7 @@ class User extends Authenticatable
 
     public function calendarevents()
     {
-        return $this->hasMany(CalendarEvent::class);
+        return $this->hasMany(CalendarEvent::class,'user_id');
     }
 
     public function staffs()
