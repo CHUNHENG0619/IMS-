@@ -20,7 +20,7 @@ class Intern extends Model
 
     public function payslips()
     {
-        return $this->hasOne(Payslip::class);
+        return $this->hasMany(Payslip::class);
     }
 
     public function applyleaves()

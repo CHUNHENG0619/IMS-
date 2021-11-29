@@ -40,7 +40,7 @@ class UserSeeder extends Seeder
     {
         $faker = \Faker\Factory::create();
        
-        for ($i=0;$i<10;$i++){
+        for ($i=0;$i<50;$i++){
             User::create([
                 'user_id'=>$faker->regexify('[A-Za-z0-9]{10,20}'),
                 'email'=>$faker->email,

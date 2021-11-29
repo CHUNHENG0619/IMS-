@@ -12,7 +12,7 @@ class CreateFAQsTable extends Migration
            $table->id('faq_id');
            $table->string('title',255);
            $table->text('content');
-           $table->string('pic',255);
+           $table->string('pic',255)->nullable();
            $table->string('category',255);
            $table->boolean('helpful');
            $table->timestamps();
