@@ -14,6 +14,14 @@ class UserController extends Controller
     //Middleware
     public function CheckLogin(){
 
+        if (Auth::user()->role == 'admin'){
+            return redirect('/admin');
+        }elseif (Auth::user()->role == 'staff') {
+            return redirect('/staff');
+        }elseif (Auth::user()->role == 'intern') {
+            return redirect('/intern');
+        }
+
     }
 
     //check login SY修改版
