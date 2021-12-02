@@ -31,6 +31,10 @@ use App\Http\Controllers\ApplyLeaveController;
 |
 */
 
+Route::get('/', function () {
+    return view('users');
+});
+
 Route::get('/users',function(){
     $users = DB::table('users')->get();
     return view('users',['users' => $users]);
@@ -54,4 +58,62 @@ Route::get('/add-interndetail',[InternDetailController::class,'addInternDetail']
 Route::get('/add-job',[JobController::class,'addJob']);
 Route::get('/add-jobapplication',[JobApplicationController::class,'addJobApplication']);
 Route::get('/add-announcement',[AnnouncementController::class,'addAnnouncement']);
+
+
+//Xirouh and seaiyou part
+
+/*
+
+kernel.php 要加
+
+protected $routeMiddleware = [
+    ...
+    'role' => \App\Http\Middleware\Role::class,
+];
+
+然后要create middleware的 role.php
+
+public function handle($request, Closure $next, ... $roles)
+{
+    if (!Auth::check())
+        return redirect('login');
+
+    $user = Auth::user();
+
+    if($user->isAdmin())
+    {
+         return $next($request);
+    }
+       
+    else if($user->isIntern)
+    {
+         return $next($request);
+    }
+
+    else if($user->isStaff)
+    {
+         return $next($request);
+    }
+
+    else if($user->isUser)
+    {
+         return $next($request);
+    }
+       
+
+    return redirect('login');
+}
+
+
+*/
+
+
+// Auth::routes();
+
+
+// Route::resource('/admin{id}',AdminController::class)->middleware('role:admin');
+// Route::resource('/intern{id}',InternController::class)->middleware('role:intern');
+// Route::resource('/staff{id}',StaffController::class)->middleware('role:staff');
+// Route::resource('/user{id}',UserController::class)->middleware('role:user');
+
 

@@ -19,4 +19,32 @@ class StaffController extends Controller
         return "Record has been add successfully!";
     }
 
+    //Xirouh and seaiyou part
+
+     //For task CRUD
+     public function ShowTask(){
+
+    }
+
+    public function ShowSelectTask($task_id){
+
+    }
+
+    public function CreateTask(){
+
+    }
+
+    public function UpdateTask(){
+
+    }
+
+    public function DeleteTask(){
+
+    }
+
+    //View calender
+    public function Calender(){
+        
+    }
+
 }

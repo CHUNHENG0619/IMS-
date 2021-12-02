@@ -21,4 +21,46 @@ class InternController extends Controller
         $intern->save();
         return "Record has been add successfully!";
     }
+
+    //xirouh and seaiyou part
+
+       //edit profilelike education background/view job application status
+     public function EditProfile(){
+
+    }
+
+    //Apply leave
+    public function ApplyLeave(){
+
+    }
+
+    //View payslip
+    public function ViewPayslip(){
+
+    }
+
+    //View task
+    public function ViewTask(){
+
+    }
+
+    //View select task
+    public function ViewSelectTask($task_id){
+
+    }
+
+    //Submit task
+    public function SubmitTask($task_id){
+
+    }
+
+    //Delete submitted task
+    public function DeleteSubmittedTask($task_id){
+
+    }
+
+    //View calender
+    public function Calender(){
+        
+    }
 }
