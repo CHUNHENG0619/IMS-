@@ -27,9 +27,9 @@ class CreateJobsTable extends Migration
             $table->date('end_date');
             $table->timestamps();
 
-            $table->foreign('admin_id')
-                  ->references('admin_id')
-                  ->on('admins');
+        //     $table->foreign('admin_id')
+        //           ->references('admin_id')
+        //           ->on('admins');
         });
     }
 

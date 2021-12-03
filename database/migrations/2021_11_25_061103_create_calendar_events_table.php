@@ -10,7 +10,7 @@ class CreateCalendarEventsTable extends Migration
     {
         Schema::create('calendar_events', function (Blueprint $table) {
             $table->id('calendar_event_id');
-            $table->string('user_id');
+            $table->integer('user_id');
             $table->string('event_title',255);
             $table->char('type_of_event',1);
             $table->dateTime('event_date');
@@ -21,10 +21,10 @@ class CreateCalendarEventsTable extends Migration
             $table->string('meet_link',30);
             $table->timestamps();
 
-            $table->foreign('user_id')
-                  ->references('user_id')
-                  ->on('users')
-                  ->onDelete('cascade');
+            // $table->foreign('user_id')
+            //       ->references('user_id')
+            //       ->on('users')
+            //       ->onDelete('cascade');
         });
     }
 

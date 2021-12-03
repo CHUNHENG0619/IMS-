@@ -26,10 +26,10 @@ class CreateInternDetailsTable extends Migration
             $table->dateTime('time_to_post');
             $table->timestamps();
 
-            $table->foreign('intern_id')
-                  ->references('intern_id')
-                  ->on('interns')
-                  ->onDelete('cascade');
+            // $table->foreign('intern_id')
+            //       ->references('intern_id')
+            //       ->on('interns')
+            //       ->onDelete('cascade');
         });
     }
 

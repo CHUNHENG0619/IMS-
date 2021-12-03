@@ -15,13 +15,13 @@ class CreateAdminsTable extends Migration
     {
         Schema::create('admins', function (Blueprint $table) {
             $table->id('admin_id');
-            $table->string('user_id');
+            $table->integer('user_id');
             $table->timestamps();
 
-            $table->foreign('user_id')
-                  ->references('user_id')
-                  ->on('users')
-                  ->onDelete('cascade');
+            // $table->foreign('user_id')
+            //       ->references('user_id')
+            //       ->on('users')
+            //       ->onDelete('cascade');
         });
     }
 

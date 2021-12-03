@@ -9,7 +9,8 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->string('user_id',20);
+            //$table->string('user_id',20);
+            $table->id('user_id');
             $table->string('email')->unique();
             $table->string('password',60);
             $table->string('name',255);
@@ -22,7 +23,6 @@ class CreateUsersTable extends Migration
             $table->dateTime('registration_time');            
             $table->timestamps();
 
-            $table->primary('user_id');
         });
     }
 

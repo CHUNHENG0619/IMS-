@@ -23,10 +23,10 @@ class CreateEducationsTable extends Migration
             $table->string('grad_period',255);
             $table->timestamps();
 
-            $table->foreign('intern_detail_id')
-                  ->references('intern_detail_id')
-                  ->on('intern_details')
-                  ->onDelete('cascade');
+            // $table->foreign('intern_detail_id')
+            //       ->references('intern_detail_id')
+            //       ->on('intern_details')
+            //       ->onDelete('cascade');
         });
     }
 

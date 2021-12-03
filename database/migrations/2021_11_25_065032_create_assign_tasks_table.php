@@ -19,14 +19,14 @@ class CreateAssignTasksTable extends Migration
             $table->dateTime('deadline');
             $table->timestamps();
 
-            $table->foreign('staff_id')
-                  ->references('staff_id')
-                  ->on('staffs')
-                  ->onDelete('cascade');  
+            // $table->foreign('staff_id')
+            //       ->references('staff_id')
+            //       ->on('staffs')
+            //       ->onDelete('cascade');  
                   
-            $table->foreign('intern_id')
-                  ->references('intern_id')
-                  ->on('interns');    
+            // $table->foreign('intern_id')
+            //       ->references('intern_id')
+            //       ->on('interns');    
         });
     }
 

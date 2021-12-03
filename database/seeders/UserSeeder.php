@@ -42,7 +42,8 @@ class UserSeeder extends Seeder
        
         for ($i=0;$i<10;$i++){
             User::create([
-                'user_id'=>$faker->regexify('[A-Za-z0-9]{10,20}'),
+               // 'user_id'=>$faker->regexify('[A-Za-z0-9]{10,20}'),
+               //'user_id'=>id();
                 'email'=>$faker->email,
                 'password'=>bcrypt($faker->password),
                 'name'=>$faker->name,

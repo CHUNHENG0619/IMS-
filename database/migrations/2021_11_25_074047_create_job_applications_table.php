@@ -22,19 +22,19 @@ class CreateJobApplicationsTable extends Migration
             $table->string('status',20);
             $table->timestamps();
 
-            $table->foreign('job_id')
-                  ->references('job_id')
-                  ->on('jobs')
-                  ->onDelete('cascade');
+            // $table->foreign('job_id')
+            //       ->references('job_id')
+            //       ->on('jobs')
+            //       ->onDelete('cascade');
 
-            $table->foreign('intern_id')
-                  ->references('intern_id')
-                  ->on('interns')
-                  ->onDelete('cascade');
+            // $table->foreign('intern_id')
+            //       ->references('intern_id')
+            //       ->on('interns')
+            //       ->onDelete('cascade');
 
-            $table->foreign('admin_id')
-                  ->references('admin_id')
-                  ->on('admins');
+            // $table->foreign('admin_id')
+            //       ->references('admin_id')
+            //       ->on('admins');
         });
     }
 
