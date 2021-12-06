@@ -21,6 +21,7 @@ class FAQSeeder extends Seeder
                 'title' => $faker->word,
                 'content' => $faker->text,
                 'category' => $faker->word,
+                'pic'=>$faker->image,
                 'helpful'=>$faker->boolean
             ]);
         }

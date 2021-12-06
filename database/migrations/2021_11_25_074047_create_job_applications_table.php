@@ -24,13 +24,11 @@ class CreateJobApplicationsTable extends Migration
 
             $table->foreign('job_id')
                   ->references('job_id')
-                  ->on('jobs')
-                  ->onDelete('cascade');
+                  ->on('jobs');
 
             $table->foreign('intern_id')
                   ->references('intern_id')
-                  ->on('interns')
-                  ->onDelete('cascade');
+                  ->on('interns');
 
             $table->foreign('admin_id')
                   ->references('admin_id')

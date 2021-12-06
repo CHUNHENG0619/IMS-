@@ -6,11 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateEducationsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('educations', function (Blueprint $table) {
@@ -25,16 +20,10 @@ class CreateEducationsTable extends Migration
 
             $table->foreign('intern_detail_id')
                   ->references('intern_detail_id')
-                  ->on('intern_details')
-                  ->onDelete('cascade');
+                  ->on('intern_details');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('educations');

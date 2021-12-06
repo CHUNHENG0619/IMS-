@@ -25,7 +25,9 @@ class PayslipSeeder extends Seeder
             Payslip::create([
                 'admin_id' => $faker->randomElement($admin_id),
                 'intern_id'=>$faker->randomElement($intern_id),
-                'amount'=>$faker->randomFloat(2,1300.0,4000.0) 
+                'amount'=>$faker->randomFloat(2,1300.0,4000.0),
+                'payslip_title'=>$faker->word,
+                'payslip_date'=>$faker->date 
             ]);
         }
     }

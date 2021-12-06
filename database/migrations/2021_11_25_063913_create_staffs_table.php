@@ -10,14 +10,13 @@ class CreateStaffsTable extends Migration
     {
         Schema::create('staffs', function (Blueprint $table) {
             $table->id('staff_id');
-            $table->string('user_id');
+            $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger("department_id");
             $table->timestamps();
 
             $table->foreign('user_id')
                   ->references('user_id')
-                  ->on('users')
-                  ->onDelete('cascade');
+                  ->on('users');
 
             $table->foreign('department_id')
                   ->references('department_id')

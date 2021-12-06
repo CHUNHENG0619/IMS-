@@ -6,11 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateAnnouncementsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('announcements', function (Blueprint $table) {
@@ -18,6 +13,11 @@ class CreateAnnouncementsTable extends Migration
             $table->unsignedBigInteger('admin_id');
             $table->string('announcement_title',255);
             $table->text('announcement_description');
+            $table->dateTime('announcement_date');
+            $table->boolean('star');
+            $table->string('department',255);
+            $table->string('job_type',255);
+            $table->string('attachment',255)->nullable();
             $table->timestamps();
 
             $table->foreign('admin_id')
@@ -26,11 +26,6 @@ class CreateAnnouncementsTable extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('announcements');

@@ -23,6 +23,10 @@ class AnnouncementSeeder extends Seeder
                 'admin_id'=>$faker->randomElement($admin_id),
                 'announcement_title'=>$faker->word,
                 'announcement_description'=>$faker->text,
+                'announcement_date'=>$faker->dateTime,
+                'star'=>$faker->boolean,
+                'department'=>$faker->name,
+                'job_type'=>$faker->jobTitle,
             ]);
         }
     }

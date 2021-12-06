@@ -42,7 +42,6 @@ class UserSeeder extends Seeder
        
         for ($i=0;$i<50;$i++){
             User::create([
-                'user_id'=>$faker->regexify('[A-Za-z0-9]{10,20}'),
                 'email'=>$faker->email,
                 'password'=>bcrypt($faker->password),
                 'name'=>$faker->name,
@@ -50,7 +49,7 @@ class UserSeeder extends Seeder
                 'address'=>$faker->address,
                 'phone'=>$faker->phoneNumber,
                 'role'=>$faker->randomElement(['intern','staff','admin']),
-                'user_type'=>$faker->randomElement(['A','I']),
+                'user_type'=>$faker->randomElement([1,2,3]),
                 'recovery_email'=>$faker->email,
                 'registration_time'=>$faker->dateTime
             ]);

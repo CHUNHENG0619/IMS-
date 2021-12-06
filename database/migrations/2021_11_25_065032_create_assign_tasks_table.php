@@ -10,19 +10,19 @@ class CreateAssignTasksTable extends Migration
     {
         Schema::create('assign_tasks', function (Blueprint $table) {
             $table->id('task_id');
-            $table->unsignedBigInteger('intern_id');
-            $table->unsignedBigInteger('staff_id');            
+            $table->unsignedBigInteger('staff_id');
+            $table->unsignedBigInteger('intern_id');                        
             $table->string('task_title',255);
             $table->text('task_description');
             $table->string('task_status',20);
+            $table->string('attachment',255)->nullable();
             $table->dateTime('start_time');
             $table->dateTime('deadline');
             $table->timestamps();
 
             $table->foreign('staff_id')
                   ->references('staff_id')
-                  ->on('staffs')
-                  ->onDelete('cascade');  
+                  ->on('staffs');  
                   
             $table->foreign('intern_id')
                   ->references('intern_id')

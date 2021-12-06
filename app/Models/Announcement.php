@@ -11,9 +11,13 @@ class Announcement extends Model
 
     protected $table = "announcements";
 
-    protected $fillable = ['announcement_id','admin_id','announcement_title','announcement_description'];
+    protected $fillable = ['announcement_id','admin_id','announcement_title','announcement_description','announcement_date','star','department','job_type','attachment'];
 
     public function admins(){
         return $this->belongsTo(Admin::class);
+    }
+
+    public function users(){
+        return $this->belongsToMany(User::class);
     }
 }

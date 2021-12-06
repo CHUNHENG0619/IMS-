@@ -23,23 +23,28 @@ class Intern extends Model
         return $this->hasMany(Payslip::class);
     }
 
-    public function applyleaves()
+    public function applyLeaves()
     {
         return $this->hasMany(ApplyLeave::class);
     }
 
-    public function jobapplications()
+    public function jobApplications()
     {
         return $this->hasOne(JobApplication::class);
     }
 
-    public function interndetails()
+    public function internDetails()
     {
         return $this->hasOne(InternDetail::class);
     }
 
-    public function assigntasks()
+    public function assignTasks()
     {
         return $this->hasMany(AssignTask::class);
+    }
+
+    public function submitTasks()
+    {
+        return $this->hasMany(submitTasks::class);
     }
 }

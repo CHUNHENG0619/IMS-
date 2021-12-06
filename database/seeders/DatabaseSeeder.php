@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
             ApplyLeaveSeeder::class,
             PayslipSeeder::class,
             AssignTaskSeeder::class,
+            SubmitTaskSeeder::class,
             ContactUsSeeder::class,
             FAQSeeder::class,
             ImprovementSeeder::class
