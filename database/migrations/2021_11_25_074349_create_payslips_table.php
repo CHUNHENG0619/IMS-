@@ -6,11 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 class CreatePayslipsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('payslips', function (Blueprint $table) {
@@ -18,6 +13,8 @@ class CreatePayslipsTable extends Migration
             $table->unsignedBigInteger('admin_id');
             $table->unsignedBigInteger('intern_id');
             $table->double('amount');
+            $table->string('payslip_title',255);
+            $table->date('payslip_date');
             $table->timestamps();
 
             $table->foreign('admin_id')
@@ -30,11 +27,6 @@ class CreatePayslipsTable extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('payslips');

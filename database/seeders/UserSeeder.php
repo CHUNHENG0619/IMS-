@@ -38,20 +38,19 @@ class UserSeeder extends Seeder
 {
     public function run()
     {
-        $faker = \Faker\Factory::create();
+        $faker = \Faker\Factory::create();        
        
-        for ($i=0;$i<10;$i++){
+        for ($i=0;$i<50;$i++){
             User::create([
-               // 'user_id'=>$faker->regexify('[A-Za-z0-9]{10,20}'),
-               //'user_id'=>id();
                 'email'=>$faker->email,
-                'password'=>bcrypt($faker->password),
+                //'password'=>bcrypt($faker->password),
+                'password'=>bcrypt('password'),
                 'name'=>$faker->name,
                 'IP_address'=>$faker->ipv4,
                 'address'=>$faker->address,
                 'phone'=>$faker->phoneNumber,
                 'role'=>$faker->randomElement(['intern','staff','admin']),
-                'user_type'=>$faker->randomElement(['A','I']),
+                'user_type'=>$faker->randomElement([1,2,3]),
                 'recovery_email'=>$faker->email,
                 'registration_time'=>$faker->dateTime
             ]);

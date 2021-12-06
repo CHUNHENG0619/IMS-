@@ -30,12 +30,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function calendartodolists()
+    public function calendarToDolLists()
     {
         return $this->hasMany(CalendarToDoList::class);
     }
 
-    public function calendarevents()
+    public function calendarEvents()
     {
         return $this->hasMany(CalendarEvent::class,'user_id');
     }
@@ -53,5 +53,10 @@ class User extends Authenticatable
     public function interns()
     {
         return $this->hasOne(Intern::class);
+    }
+
+    public function announcements()
+    {
+        return $this->hasMany(Announcement::class);
     }
 }

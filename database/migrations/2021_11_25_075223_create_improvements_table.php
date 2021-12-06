@@ -6,11 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateImprovementsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('improvements', function (Blueprint $table) {
@@ -26,11 +21,6 @@ class CreateImprovementsTable extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('improvements');

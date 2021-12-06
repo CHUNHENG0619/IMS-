@@ -14,7 +14,7 @@ class Education extends Model
     protected $fillable = ['edu_id','intern_detail_id','current_edu_level','current_edu_institution',
                           'study_field','grad_period'];
 
-    public function interndetails(){
+    public function internDetails(){
         return $this->belongsTo(InternDetail::class);
     }
 }

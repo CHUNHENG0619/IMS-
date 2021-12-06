@@ -6,11 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateInternDetailsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('intern_details', function (Blueprint $table) {
@@ -18,7 +13,7 @@ class CreateInternDetailsTable extends Migration
             $table->unsignedBigInteger('intern_id');
             $table->date('time_to_start');
             $table->date('time_to_end');
-            $table->string('resume',255);
+            $table->string('resume',255)->nullable();
             $table->text('text');
             $table->string('state',30);
             $table->string('status',20);
@@ -26,18 +21,12 @@ class CreateInternDetailsTable extends Migration
             $table->dateTime('time_to_post');
             $table->timestamps();
 
-            // $table->foreign('intern_id')
-            //       ->references('intern_id')
-            //       ->on('interns')
-            //       ->onDelete('cascade');
+            $table->foreign('intern_id')
+                  ->references('intern_id')
+                  ->on('interns');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('interns_details');

@@ -10,17 +10,16 @@ class CreateInternsTable extends Migration
     {
         Schema::create('interns', function (Blueprint $table) {
             $table->id('intern_id');
-            $table->integer('user_id');
+            $table->unsignedBigInteger('user_id');
             $table->string('intern_name',255);
             $table->string('intern_department',255);
-            $table->string('intern_email',30)->unique();
+            $table->string('intern_email',60)->unique();
             $table->string('intern_phone',20);
             $table->timestamps();
 
-            // $table->foreign('user_id')
-            //       ->references('user_id')
-            //       ->on('users')
-            //       ->onDelete('cascade');
+            $table->foreign('user_id')
+                  ->references('user_id')
+                  ->on('users');
         });
     }
 

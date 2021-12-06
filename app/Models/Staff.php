@@ -22,8 +22,13 @@ class Staff extends Model
         return $this->belongsTo(Department::class);
     }
 
-    public function assigntasks()
+    public function assignTasks()
     {
         return $this->hasMany(AssignTask::class);
+    }
+
+    public function submitTasks()
+    {
+        return $this->hasMany(SubmitTask::class);
     }
 }

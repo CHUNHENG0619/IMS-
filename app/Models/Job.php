@@ -18,7 +18,7 @@ class Job extends Model
         return $this->belongsTo(Admin::class);
     }
 
-    public function jobapplications()
+    public function jobApplications()
     {
         return $this->hasMany(JobApplication::class);
     }

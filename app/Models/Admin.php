@@ -32,12 +32,12 @@ class Admin extends Model
         return $this->hasMany(Job::class);
     }
 
-    public function jobapplications()
+    public function jobApplications()
     {
         return $this->hasMany(JobApplication::class);
     }
 
-    public function applyleaves()
+    public function applyLeaves()
     {
         return $this->hasMany(ApplyLeave::class);
     }

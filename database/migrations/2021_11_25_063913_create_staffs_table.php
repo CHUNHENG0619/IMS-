@@ -10,18 +10,17 @@ class CreateStaffsTable extends Migration
     {
         Schema::create('staffs', function (Blueprint $table) {
             $table->id('staff_id');
-            $table->integer('user_id');
+            $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger("department_id");
             $table->timestamps();
 
-            // $table->foreign('user_id')
-            //       ->references('user_id')
-            //       ->on('users')
-            //       ->onDelete('cascade');
+            $table->foreign('user_id')
+                  ->references('user_id')
+                  ->on('users');
 
-            // $table->foreign('department_id')
-            //       ->references('department_id')
-            //       ->on('departments');
+            $table->foreign('department_id')
+                  ->references('department_id')
+                  ->on('departments');
         });
     }
 

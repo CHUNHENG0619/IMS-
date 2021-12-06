@@ -6,11 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateEducationsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('educations', function (Blueprint $table) {
@@ -23,18 +18,12 @@ class CreateEducationsTable extends Migration
             $table->string('grad_period',255);
             $table->timestamps();
 
-            // $table->foreign('intern_detail_id')
-            //       ->references('intern_detail_id')
-            //       ->on('intern_details')
-            //       ->onDelete('cascade');
+            $table->foreign('intern_detail_id')
+                  ->references('intern_detail_id')
+                  ->on('intern_details');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('educations');
