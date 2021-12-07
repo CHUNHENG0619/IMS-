@@ -10,7 +10,7 @@ class CalendarToDoList extends Model
     use HasFactory;
 
     protected $table = "calendar_to_do_lists";
-
+    protected $primaryKey = "calendar_to_do_lists_id";
     protected $fillable = ['calendar_to_do_lists_id','user_id','description','title','task_color','task_status',
                            'start_time','deadline'];
 

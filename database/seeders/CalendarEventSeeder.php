@@ -19,7 +19,8 @@ class CalendarEventSeeder extends Seeder
                 'event_title'=>$faker->word,
                 // I = Interview , M = Important Meeting, N = Normal Meeting, L = Leisure Event, S = Seminar
                 'type_of_event'=>$faker->randomElement(['I','M','N','L','S']),                 
-                'event_date'=>$faker->dateTime,
+                'event_start_time'=>$faker->dateTime,
+                'event_end_time'=>$faker->dateTime,
                 'event_description'=>$faker->text,
                 'location'=>$faker->randomElement(['Zoom','Google Meet',$faker->address]),
                 'meet_link'=>'location'=='Zoom'||'Google Meet'?'':$faker->regexify('https:://meet.google.com/[A-Z]{3}-[A-Z]{3}-[A-Z]{3}')

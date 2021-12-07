@@ -10,6 +10,7 @@ class Announcement extends Model
     use HasFactory;
 
     protected $table = "announcements";
+    protected $primaryKey = "announcement_id";
 
     protected $fillable = ['announcement_id','admin_id','announcement_title','announcement_description','announcement_date','star','department','job_type','attachment'];
 

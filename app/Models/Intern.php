@@ -10,7 +10,7 @@ class Intern extends Model
     use HasFactory;
 
     protected $table = "interns";
-
+    protected $primaryKey = "intern_id";
     protected $fillable = ['intern_id','intern_name','intern_department','intern_email'
                           ,'intern_phone'];
 

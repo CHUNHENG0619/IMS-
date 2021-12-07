@@ -10,10 +10,11 @@ class CalendarEvent extends Model
     use HasFactory;
 
     protected $table = "calendar_events";
+    public $primaryKey = "calendar_event_id";
 
     // involved member (JSON) & attachment (string path) will ne currently nullable now for faker
 
-    protected $fillable = ['calendar_event_id','user_id','event_title','type_of_event','event_date','event_description',
+    protected $fillable = ['calendar_event_id','user_id','event_title','type_of_event','event_start_time','event_end_time','event_description',
                            'location','meet_link'];
 
     public function user(){

@@ -10,7 +10,7 @@ class InternDetail extends Model
     use HasFactory;
 
     protected $table = "intern_details";
-
+    protected $primaryKey = "intern_details_id";
     // resume is null currently for faker
 
     protected $fillable = ['intern_details_id','intern_id','time_to_start','time_to_end',

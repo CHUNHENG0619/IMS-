@@ -10,7 +10,7 @@ class SubmitTask extends Model
     use HasFactory;
 
     protected $table = "submit_tasks";
-
+    protected $primaryKey = "submit_task_id";
     protected $fillable = [
         'submit_task_id', 'staff_id', 'intern_id', 'staff_id',
         'intern_submitted_task', 'submitted_task_description'

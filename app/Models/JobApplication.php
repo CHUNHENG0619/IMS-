@@ -10,7 +10,7 @@ class JobApplication extends Model
     use HasFactory;
 
     protected $table = "job_applications";
-
+    protected $primaryKey = "apply_id";
     protected $fillable = ['apply_id','job_id','intern_id','admin_id','apply_date','status'];
 
     public function admins(){

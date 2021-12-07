@@ -10,7 +10,7 @@ class Payslip extends Model
     use HasFactory;
 
     protected $table = "payslips";
-
+    protected $primaryKey = "payslip_id";
     protected $fillable = ['payslip_id','admin_id','intern_id','amount','payslip_title','payslip_date'];
 
     public function admins(){

@@ -10,7 +10,7 @@ class AssignTask extends Model
     use HasFactory;
 
     protected $table = "assign_tasks";
-
+    protected $primaryKey = "task_id";
     protected $fillable = [
         'task_id', 'staff_id', 'intern_id', 'task_title', 'task_description', 'task_status', 'attachment', 'intern_submitted_work', 'start_time', 'deadline'
     ];

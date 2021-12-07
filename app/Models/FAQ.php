@@ -10,7 +10,7 @@ class FAQ extends Model
     use HasFactory;
 
     protected $table = "FAQs";
-
+    protected $primaryKey = "faq_id";
     // pic is currently null for faker
 
     protected $fillable = ['faq_id','title','content','category','helpful'];

@@ -10,7 +10,7 @@ class ApplyLeave extends Model
     use HasFactory;
 
     protected $table = "apply_leaves";
-
+    protected $primaryKey = "leave_id";
     protected $fillable = ['leave_id','intern_id','admin_id','start_date','end_date','remark',
                           'status'];
 

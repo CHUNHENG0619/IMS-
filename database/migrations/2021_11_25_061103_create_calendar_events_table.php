@@ -13,12 +13,13 @@ class CreateCalendarEventsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('event_title',255);
             $table->char('type_of_event',1);
-            $table->dateTime('event_date');
+            $table->dateTime('event_start_time');
+            $table->dateTime('event_end_time');
             $table->string('attachment',255)->nullable();
             $table->text('event_description');
             $table->string('location',255);
             $table->json('involved_member')->nullable();
-            $table->string('meet_link',30);
+            $table->string('meet_link',30)->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')
