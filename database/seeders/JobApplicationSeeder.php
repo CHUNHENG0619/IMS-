@@ -27,7 +27,7 @@ class JobApplicationSeeder extends Seeder
                 'job_id'=>$faker->randomElement($job_id),
                 'intern_id'=>$faker->randomElement($intern_id),
                 'admin_id'=>$faker->randomElement($admin_id),
-                'apply_date'=>$faker->date,
+                'apply_date'=>$faker->dateTimeThisYear,
                 'status'=>$faker->randomElement(['Accepted','Declined','Pending'])
             ]);
         }

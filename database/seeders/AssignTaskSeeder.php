@@ -28,8 +28,8 @@ class AssignTaskSeeder extends Seeder
                 'task_title'=>$faker->word,
                 'task_description'=>$faker->text,
                 'task_status'=>$faker->randomElement(['ongoing','done','pending']),
-                'start_time'=>$faker->datetime,
-                'deadline'=>$faker->dateTime
+                'start_time'=>$faker->dateTimeThisYear,
+                'deadline'=>$faker->dateTimeBetween('next Monday','next Monday +10 days'),
             ]);
         }
     }

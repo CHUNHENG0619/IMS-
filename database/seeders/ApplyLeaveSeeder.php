@@ -25,8 +25,8 @@ class ApplyLeaveSeeder extends Seeder
             ApplyLeave::create([
                 'intern_id' => $faker->randomElement($intern_id),
                 'admin_id'=>$faker->randomElement($admin_id),
-                'start_date'=>$faker->date,
-                'end_date'=>$faker->date,
+                'start_date'=>$faker->dateTimeThisYear,
+                'end_date'=>$faker->dateTimeBetween('next Monday','next Monday +1 days'),
                 'remark'=>$faker->text,
                 'status'=>$faker->randomElement(['Approved','Declined','Pending'])
              ]);

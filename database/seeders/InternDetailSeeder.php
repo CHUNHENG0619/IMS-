@@ -21,13 +21,13 @@ class InternDetailSeeder extends Seeder
         for ($i=0;$i<10;$i++){
             InternDetail::create([
                 'intern_id'=>$faker->randomElement($intern_id),
-                'time_to_start'=>$faker->date,
-                'time_to_end'=>$faker->date,
+                'time_to_start'=>$faker->dateTimeThisYear,
+                'time_to_end'=>$faker->dateTimeBetween('next Monday','next Monday +30 days'),
                 'text'=>$faker->text,
                 'state'=>$faker->state,
                 'status'=>$faker->randomElement(['Pending','Accepted','Declined']),
-                'time_to_update'=>$faker->dateTime,
-                'time_to_post'=>$faker->dateTime
+                'time_to_update'=>$faker->dateTimeThisYear,
+                'time_to_post'=>$faker->dateTimeThisYear
             ]);
         }
     }

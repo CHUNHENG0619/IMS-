@@ -20,8 +20,8 @@ class CalendarToDoListSeeder extends Seeder
                 'title'=>$faker->word,                 
                 'task_color'=>$faker->randomElement(['G','R','Y','B']),
                 'task_status'=>$faker->randomElement(['completed','incompleted']),
-                'start_time'=>$faker->dateTime,
-                'deadline'=>$faker->dateTime
+                'start_time'=>$faker->dateTimeThisMonth,
+                'deadline'=>$faker->dateTimeBetween('next Monday','next Monday +1 days')
              ]);
         }
     }

@@ -30,8 +30,8 @@ class JobSeeder extends Seeder
                 'job_type'=>$faker->jobTitle,
                 'job_location'=>$faker->address,
                 'salary'=>$faker->randomFloat(2,1300.00,4000.00),
-                'start_date'=>$faker->date,
-                'end_date'=>$faker->date
+                'start_date'=>$faker->dateTimeThisYear,
+                'end_date'=>$faker->dateTimeBetween('next Monday','next Monday +30 days'),
             ]);
         }
     }
