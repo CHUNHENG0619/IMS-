@@ -1,0 +1,529 @@
+[
+    {
+        "holiday_id": "1",
+        "holiday_name": "New Year's Day",
+        "start_date": "2021-01-01",
+        "end_date": "2021-01-01",
+        "states": [
+            "Malacca",
+            "Negeri Sembilan",
+            "Pahang",
+            "Penang",
+            "Perak",
+            "Sabah",
+            "Sarawak",
+            "Selangor",
+            "Kuala Lumpur",
+            "Labuan",
+            "Putrajaya"
+        ],
+        "total_holiday_days": 1
+    },
+    {
+        "holiday_id": "2",
+        "holiday_name": "YDPB Negeri Sembilan's Birthday",
+        "start_date": "2021-01-14",
+        "end_date": "2021-01-14",
+        "states": [
+            "Negeri Sembilan"
+        ],
+        "total_holiday_days": 1
+    },
+    {
+        "holiday_id": "3",
+        "holiday_name": "Thaipusam",
+        "start_date": "2021-01-28",
+        "end_date": "2021-01-28",
+        "states": [
+            "Johor",
+            "Kuala Lumpur",
+            "Negeri Sembilan",
+            "Penang",
+            "Perak",
+            "Putrajaya",
+            "Selangor"
+        ],
+        "total_holiday_days": 1
+    },
+    {
+        "holiday_id": "4",
+        "holiday_name": "Federal Territory Day",
+        "start_date": "2021-02-01",
+        "end_date": "2021-02-01",
+        "states": [
+            "Kuala Lumpur",
+            "Labuan",
+            "Putrajaya"
+        ],
+        "total_holiday_days": 1
+    },
+    {
+        "holiday_id": "5",
+        "holiday_name": "Chinese New Year",
+        "start_date": "2021-02-12",
+        "end_date": "2021-02-14",
+        "states": [
+            "National"
+        ],
+        "total_holiday_days": 3
+    },
+    {
+        "holiday_id": "6",
+        "holiday_name": "Installation of Sultan Terengganu",
+        "start_date": "2021-03-04",
+        "end_date": "2021-03-04",
+        "states": [
+            "Terengganu"
+        ],
+        "total_holiday_days": 1
+    },
+    {
+        "holiday_id": "7",
+        "holiday_name": "Israk and Mikraj",
+        "start_date": "2021-03-11",
+        "end_date": "2021-03-11",
+        "states": [
+            "Kedah",
+            "Negeri Sembilan",
+            "Perlis",
+            "Terengganu"
+        ],
+        "total_holiday_days": 1
+    },
+    {
+        "holiday_id": "8",
+        "holiday_name": "Sultan of Johor's Birthday",
+        "start_date": "2021-03-23",
+        "end_date": "2021-03-23",
+        "states": [
+            "Johor"
+        ],
+        "total_holiday_days": 1
+    },
+    {
+        "holiday_id": "9",
+        "holiday_name": "Good Friday",
+        "start_date": "2021-04-02",
+        "end_date": "2021-04-02",
+        "states": [
+            "Sabah",
+            "Sarawak"
+        ],
+        "total_holiday_days": 1
+    },
+    {
+        "holiday_id": "10",
+        "holiday_name": "Awal Ramadan",
+        "start_date": "2021-04-13",
+        "end_date": "2021-04-13",
+        "states": [
+            "Johor",
+            "Kedah",
+            "Melaka"
+        ],
+        "total_holiday_days": 1
+    },
+    {
+        "holiday_id": "11",
+        "holiday_name": "Declaration of Melaka as a Historical City",
+        "start_date": "2021-04-15",
+        "end_date": "2021-04-15",
+        "states": [
+            "Melaka"
+        ],
+        "total_holiday_days": 1
+    },
+    {
+        "holiday_id": "12",
+        "holiday_name": "Sultan of Terengganu's Birthday",
+        "start_date": "2021-04-26",
+        "end_date": "2021-04-26",
+        "states": [
+            "Terengganu"
+        ],
+        "total_holiday_days": 1
+    },
+    {
+        "holiday_id": "13",
+        "holiday_name": "Nuzul Al-Quran",
+        "start_date": "2021-04-29",
+        "end_date": "2021-04-29",
+        "states": [
+            "Pahang",
+            "Penang",
+            "Perak",
+            "Selangor",
+            "Terengganu",
+            "Pahang",
+            "Kuala Lumpur",
+            "Labuan",
+            "Putrajaya",
+            "Perlis",
+            "Kelantan"
+        ],
+        "total_holiday_days": 1
+    },
+    {
+        "holiday_id": "14",
+        "holiday_name": "Labour Day",
+        "start_date": "2021-05-01",
+        "end_date": "2021-05-01",
+        "states": [
+            "National"
+        ],
+        "total_holiday_days": 1
+    },
+    {
+        "holiday_id": "15",
+        "holiday_name": "Labour Day - 2",
+        "start_date": "2021-05-01",
+        "end_date": "2021-05-01",
+        "states": [
+            "Kelantan",
+            "Terengganu"
+        ],
+        "total_holiday_days": 1
+    },
+    {
+        "holiday_id": "16",
+        "holiday_name": "Hari Raya Aidilfitri",
+        "start_date": "2021-05-13",
+        "end_date": "2021-05-14",
+        "states": [
+            "National"
+        ],
+        "total_holiday_days": 2
+    },
+    {
+        "holiday_id": "17",
+        "holiday_name": "Hari Raya Aidilfitri - 2",
+        "start_date": "2021-05-16",
+        "end_date": "2021-05-16",
+        "states": [
+            "Kelantan",
+            "Terengganu"
+        ],
+        "total_holiday_days": 1
+    },
+    {
+        "holiday_id": "18",
+        "holiday_name": "Hari Hol Pahang",
+        "start_date": "2021-05-22",
+        "end_date": "2021-05-22",
+        "states": [
+            "Pahang"
+        ],
+        "total_holiday_days": 1
+    },
+    {
+        "holiday_id": "19",
+        "holiday_name": "Wesak Day",
+        "start_date": "2021-05-26",
+        "end_date": "2021-05-26",
+        "states": [
+            "National"
+        ],
+        "total_holiday_days": 1
+    },
+    {
+        "holiday_id": "20",
+        "holiday_name": "Harvest Festival",
+        "start_date": "2021-05-30",
+        "end_date": "2021-05-31",
+        "states": [
+            "Labuan",
+            "Sabah"
+        ],
+        "total_holiday_days": 2
+    },
+    {
+        "holiday_id": "21",
+        "holiday_name": "Hari Gawai",
+        "start_date": "2021-06-01",
+        "end_date": "2021-06-02",
+        "states": [
+            "Sarawak"
+        ],
+        "total_holiday_days": 2
+    },
+    {
+        "holiday_id": "22",
+        "holiday_name": "Agong's Birthday",
+        "start_date": "2021-06-07",
+        "end_date": "2021-06-07",
+        "states": [
+            "National"
+        ],
+        "total_holiday_days": 1
+    },
+    {
+        "holiday_id": "23",
+        "holiday_name": "Sultan of Kedah's Birthday",
+        "start_date": "2021-06-20",
+        "end_date": "2021-06-20",
+        "states": [
+            "Kedah"
+        ],
+        "total_holiday_days": 1
+    },
+    {
+        "holiday_id": "24",
+        "holiday_name": "Georgetown World Heritage City Day",
+        "start_date": "2021-07-07",
+        "end_date": "2021-07-07",
+        "states": [
+            "Penang"
+        ],
+        "total_holiday_days": 1
+    },
+    {
+        "holiday_id": "25",
+        "holiday_name": "Penang Governor's Birthday",
+        "start_date": "2021-07-10",
+        "end_date": "2021-07-10",
+        "states": [
+            "Penang"
+        ],
+        "total_holiday_days": 1
+    },
+    {
+        "holiday_id": "26",
+        "holiday_name": "Raja Perlis' Birthday",
+        "start_date": "2021-07-17",
+        "end_date": "2021-07-17",
+        "states": [
+            "Perlis"
+        ],
+        "total_holiday_days": 1
+    },
+    {
+        "holiday_id": "27",
+        "holiday_name": "Arafat Day",
+        "start_date": "2021-07-19",
+        "end_date": "2021-07-19",
+        "states": [
+            "Terengganu"
+        ],
+        "total_holiday_days": 1
+    },
+    {
+        "holiday_id": "28",
+        "holiday_name": "Hari Raya Haji",
+        "start_date": "2021-07-20",
+        "end_date": "2021-07-20",
+        "states": [
+            "National"
+        ],
+        "total_holiday_days": 1
+    },
+    {
+        "holiday_id": "29",
+        "holiday_name": "Hari Raya Haji - 2",
+        "start_date": "2021-07-21",
+        "end_date": "2021-07-21",
+        "states": [
+            "Kedah",
+            "Kelantan",
+            "Perlis",
+            "Terengganu"
+        ],
+        "total_holiday_days": 1
+    },
+    {
+        "holiday_id": "30",
+        "holiday_name": "Sarawak Day",
+        "start_date": "2021-07-22",
+        "end_date": "2021-07-22",
+        "states": [
+            "Sarawak"
+        ],
+        "total_holiday_days": 1
+    },
+    {
+        "holiday_id": "31",
+        "holiday_name": "Sultan of Pahang's Birthday",
+        "start_date": "2021-07-30",
+        "end_date": "2021-07-30",
+        "states": [
+            "Pahang"
+        ],
+        "total_holiday_days": 1
+    },
+    {
+        "holiday_id": "32",
+        "holiday_name": "Awal Muharram",
+        "start_date": "2021-08-10",
+        "end_date": "2021-08-10",
+        "states": [
+            "National"
+        ],
+        "total_holiday_days": 1
+    },
+    {
+        "holiday_id": "33",
+        "holiday_name": "Melaka Governor's Birthday",
+        "start_date": "2021-08-24",
+        "end_date": "2021-08-24",
+        "states": [
+            "Melaka"
+        ],
+        "total_holiday_days": 1
+    },
+    {
+        "holiday_id": "34",
+        "holiday_name": "Merdeka Day",
+        "start_date": "2021-08-31",
+        "end_date": "2021-08-31",
+        "states": [
+            "National"
+        ],
+        "total_holiday_days": 1
+    },
+    {
+        "holiday_id": "35",
+        "holiday_name": "Hari Hol Almarhum Sultan Iskandar",
+        "start_date": "2021-09-13",
+        "end_date": "2021-09-13",
+        "states": [
+            "Johor"
+        ],
+        "total_holiday_days": 1
+    },
+    {
+        "holiday_id": "36",
+        "holiday_name": "Malaysia Day",
+        "start_date": "2021-09-16",
+        "end_date": "2021-09-16",
+        "states": [
+            "National"
+        ],
+        "total_holiday_days": 1
+    },
+    {
+        "holiday_id": "37",
+        "holiday_name": "Sabah Governor's Birthday",
+        "start_date": "2021-10-02",
+        "end_date": "2021-10-02",
+        "states": [
+            "Sabah"
+        ],
+        "total_holiday_days": 1
+    },
+    {
+        "holiday_id": "38",
+        "holiday_name": "Sarawak Governor's Birthday",
+        "start_date": "2021-10-09",
+        "end_date": "2021-10-09",
+        "states": [
+            "Sarawak"
+        ],
+        "total_holiday_days": 1
+    },
+    {
+        "holiday_id": "39",
+        "holiday_name": "Prophet Muhammad's Birthday",
+        "start_date": "2021-10-19",
+        "end_date": "2021-10-19",
+        "states": [
+            "National"
+        ],
+        "total_holiday_days": 1
+    },
+    {
+        "holiday_id": "40",
+        "holiday_name": "Deepavali",
+        "start_date": "2021-11-04",
+        "end_date": "2021-11-04",
+        "states": [
+            "Johor",
+            "Kedah",
+            "Kelantan",
+            "Malacca",
+            "Negeri Sembilan",
+            "Pahang",
+            "Penang",
+            "Perak",
+            "Perlis",
+            "Sabah",
+            "Selangor",
+            "Terengganu",
+            "Kuala Lumpur",
+            "Putrajaya",
+            "Labuan"
+        ],
+        "total_holiday_days": 1
+    },
+    {
+        "holiday_id": "41",
+        "holiday_name": "Sultan of Perak's Birthday",
+        "start_date": "2021-11-05",
+        "end_date": "2021-11-05",
+        "states": [
+            "Perak"
+        ],
+        "total_holiday_days": 1
+    },
+    {
+        "holiday_id": "42",
+        "holiday_name": "Sultan of Kelantan's Birthday",
+        "start_date": "2021-11-11",
+        "end_date": "2021-11-12",
+        "states": [
+            "Kelantan"
+        ],
+        "total_holiday_days": 2
+    },
+    {
+        "holiday_id": "43",
+        "holiday_name": "Malaysia Cup Holiday",
+        "start_date": "2021-12-03",
+        "end_date": "2021-12-03",
+        "states": [
+            "Kuala Lumpur",
+            "Labuan",
+            "Putrajaya"
+        ],
+        "total_holiday_days": 1
+    },
+    {
+        "holiday_id": "44",
+        "holiday_name": "Malaysia Cup Holiday",
+        "start_date": "2021-12-11",
+        "end_date": "2021-12-11",
+        "states": [
+            "Selangor"
+        ],
+        "total_holiday_days": 1
+    },
+    {
+        "holiday_id": "45",
+        "holiday_name": "Christmas Eve",
+        "start_date": "2021-12-24",
+        "end_date": "2021-12-24",
+        "states": [
+            "Sabah"
+        ],
+        "total_holiday_days": 1
+    },
+    {
+        "holiday_id": "46",
+        "holiday_name": "Christmas Day",
+        "start_date": "2021-12-25",
+        "end_date": "2021-12-25",
+        "states": [
+            "National"
+        ],
+        "total_holiday_days": 1
+    },
+    {
+        "holiday_id": "47",
+        "holiday_name": "Christmas Day - 2",
+        "start_date": "2021-12-26",
+        "end_date": "2021-12-26",
+        "states": [
+            "Kelantan",
+            "Terengganu"
+        ],
+        "total_holiday_days": 1
+    }
+]
