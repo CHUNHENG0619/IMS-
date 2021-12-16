@@ -3,6 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
+use DatePeriod;
+use DateInterval;
+use Illuminate\Support\Facades\Http;
+
 use App\Models\User;
 use App\Models\CalendarToDoList;
 use App\Models\CalendarEvent;
@@ -11,11 +20,7 @@ use App\Models\Admin;
 use App\Models\Intern;
 use App\Models\Holiday;
 use App\Models\InternDetail;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\DB;
+
 
 class UserController extends Controller
 {
@@ -48,23 +53,26 @@ class UserController extends Controller
         ]);
     }
 
-    public function viewCalendarEventNearDue()
+    public function viewNearCalendarEvent(Request $request)
     {
+        // check all the calendar event of the user using cookie
         $calendarEvents = CalendarEvent::all();
-        $calendarEventNearDue = [
+
+        // initialize arrau
+        $calendarEventNearDue = array(
             'event_details' => [],
             'event_due_time' => []
-        ];
+        );
 
         foreach ($calendarEvents as $calendarEvent) {
-            $event_start_time = Carbon::parse($calendarEvent->event_start_time);
+            $now = Carbon::parse(Carbon::now());
             $event_end_time = Carbon::parse($calendarEvent->event_end_time);
-            $timeDifference = $event_start_time->diffInDays($event_end_time, false);
+            $due = $now->diffInDays($event_end_time, false);
 
             // Check the due day search by user
-            if (($timeDifference) < 30) {
+            if ($due < $request->due) {
                 array_push($calendarEventNearDue['event_details'], $calendarEvent);
-                array_push($calendarEventNearDue['event_due_time'], "The event will be on due " . $timeDifference . " days");
+                array_push($calendarEventNearDue['event_due_time'], "The event ID " . $calendarEvent->calendar_event_id . " will be on due " . $due . " days");
             }
         }
 
@@ -197,23 +205,58 @@ class UserController extends Controller
     public function deleteCalendarEvent($id)
     {
         $deleteCalendarEvent = CalendarEvent::find($id);
-        $deleteCalendarEvent->delete();
 
-        return response()->json([
-            'status' => 200,
-            'message' => 'Removed Calendar Event!'
-        ]);
+        if ($deleteCalendarEvent) {
+            $deleteCalendarEvent->delete();
+
+            return response()->json([
+                'status' => 200,
+                'message' => 'Removed Calendar Event!'
+            ]);
+        } else {
+            return response()->json([
+                'status' => 400,
+                'message' => 'Calenadar Event Is Not Removed Successfully!'
+            ]);
+        }
     }
 
     public function attendance($id)
     {
-        $totalWorkDay = InternDetail::where('intern_id', $id)->get(['time_to_start', 'time_to_end']);
+        // TO GET INTERN START DATE & END DATE
+        $totalWorkDays = InternDetail::where('intern_id', $id)->get()->first();
 
-        if ($totalWorkDay) {
-            $difference = ($totalWorkDay->pluck('time_to_start'))->diffInDays($totalWorkDay->pluck('time_to_end'));
-            echo $difference;
+        if ($totalWorkDays) {
+            // TO RETREIEVE HOLIDAYS DATE
+            $holidays = Holiday::all()->pluck('start_date')->toArray();
+
+            // TO RETRIEVE INTERN START DATE
+            $start = Carbon::parse($totalWorkDays->time_to_start);
+
+            // TO RETRIEVE INTERN END DATE
+            $end = Carbon::parse($totalWorkDays->time_to_end);
+
+            // TO CALCULATE DATE DIFFERENCE
+            $totalDayOfWork = $start->diffInDays($end);
+
+            // MAKE A TIME INTERVAL START FROM ITNERN START DATE UNTIL END DATE
+            $period = new DatePeriod($start, new DateInterval('P1D'), $end);
+
+            foreach ($period as $day) {
+                // TURN DATE TO INTO DAYS OF WEEK
+                $current = $day->format('D');
+
+                // MINUS DATE SATURDAY & SUNDAY
+                if ($current == 'Sat' || $current == 'Sun') {
+                    $totalDayOfWork--;
+                }
+                // MINUS HOLIDAY
+                else if (in_array($day->toDateString(), $holidays)) {
+                    $totalDayOfWork--;
+                }
+            }
             return response()->json([
-                'work' => $totalWorkDay,
+                'attendance' => $totalDayOfWork,
                 'message' => "Successfully to fetch interns' attendance",
             ]);
         } else {
@@ -321,30 +364,84 @@ class UserController extends Controller
         ]);
     }
 
-    public function readJson()
+    public function sortCalendarToDoListByColor(Request $request, $id)
     {
-        $holidays = file_get_contents(base_path('storage/json/holidays2021.json'));
-        $data = json_decode($holidays, true);
+        $toDoList = CalendarToDoList::find($id);
 
-        foreach ($data as $myData) {
-            $holiday = new Holiday();
-            $holiday->holiday_id = $myData['holiday_id'];
-            $holiday->holiday_name = $myData['holiday_name'];
-            $holiday->start_date = $myData['start_date'];
-            $holiday->end_date = $myData['end_date'];
-            $holiday->total_holiday_days = $myData['total_holiday_days'];
-            $holiday->states = $myData['states'];
-            $holiday->save();
-        }
+        if ($toDoList) {
+            $sort = $toDoList->where('color', $request->task_color)->get();
 
-        if ($myData) {
             return response()->json([
-                "message" => "Success",
+                'status' => 200,
+                'sort' => $sort
             ]);
         } else {
             return response()->json([
-                "message" => "Unsuccessful",
+                'status' => 400,
+                'message' => "To Do List not found!"
             ]);
         }
+    }
+
+    public function sortCalendarToDoListByStatus(Request $request, $id)
+    {
+        $toDoList = CalendarToDoList::find($id);
+
+        if ($toDoList) {
+            $sort = $toDoList->where('status', $request->task_status)->get();
+
+            return response()->json([
+                'status' => 200,
+                'sort' => $sort
+            ]);
+        } else {
+            return response()->json([
+                'status' => 400,
+                'message' => "To Do List not found!"
+            ]);
+        }
+    }
+
+    public function viewCalendarToDoListNearDue(Request $request)
+    {
+        // check all the calendar to do list of the user using cookie
+        $calendarToDoLists = CalendarToDoList::all();
+
+        // initialize arrau
+        $calendarToDoListNearDue = array(
+            'to_do_list_details' => [],
+            'to_do_list_due_time' => []
+        );
+
+        foreach ($calendarToDoLists as $calendarToDoList) {
+            $now = Carbon::parse(Carbon::now());
+            $event_end_time = Carbon::parse($calendarToDoList->deadline);
+            $due = $now->diffInDays($event_end_time, false);
+
+            // Check the due day search by user
+            if ($due < $request->due) {
+                array_push($calendarToDoListNearDue['to_do_list_details'], $calendarToDoList);
+                array_push($calendarToDoListNearDue['to_do_list_due_time'], "The event ID " . $calendarToDoList->calendar_event_id . " will be on due " . $due . " days");
+            }
+        }
+
+        return response()->json([
+            'calendarToDoList' => $calendarToDoListNearDue,
+        ]);
+    }
+
+    public function getWeatherData(Request $request)
+    {
+        $city_name = $request->city_name;
+        $api_key = config('services.openweather.key');
+        $currentWeather = Http::get('http://api.openweathermap.org/data/2.5/weather?q=' . $city_name . '&appid=' . $api_key . '&units=metric');
+
+        return response()->json([
+            "weather" => $currentWeather->json(),
+        ]);
+    }
+
+    public function getMeetingCode()
+    {
     }
 }
