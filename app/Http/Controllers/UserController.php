@@ -440,8 +440,4 @@ class UserController extends Controller
             "weather" => $currentWeather->json(),
         ]);
     }
-
-    public function getMeetingCode()
-    {
-    }
 }
