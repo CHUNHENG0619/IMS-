@@ -33,5 +33,10 @@ return [
     'openweather' => [
         'key' => env('OPENWEATHER_KEY'),
     ],
+    
+    'zoom'=>[
+        'key'=>env('ZOOM_API_KEY'),
+        'secret'=>env('ZOOM_SECRET_KEY'),
+    ],
 
 ];

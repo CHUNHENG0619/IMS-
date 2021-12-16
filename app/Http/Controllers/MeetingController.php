@@ -10,8 +10,8 @@ use GuzzleHttp\Client as Http;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-define('ZOOM_API_KEY', 'hzHuQhpTTkGsG1gtbjRi2g');
-define('ZOOM_SECRET_KEY', '4Umxi1lImkZYZrxeanZXxMNYKtviNU28dKqT');
+define('ZOOM_API_KEY', config('services.zoom.key'));
+define('ZOOM_SECRET_KEY', config('services.zoom.secret'));
 
 class MeetingController extends Controller
 {

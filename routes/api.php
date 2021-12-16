@@ -48,6 +48,6 @@ Route::get('/weather',[UserController::class,'getWeatherData']);
 
 // -------------------------- ZOOM --------------------------
 Route::get('/viewZoomMeeting',[MeetingController::class,'list_meetings']);
-Route::post('/addZoomMeeting',[MeetingController::class,'createZoomMeeting']);
+Route::post('/createZoomMeeting',[MeetingController::class,'createZoomMeeting']);
 Route::get('/deleteZoomMeeting',[MeetingController::class,'deleteZoomMeeting']);
 Route::get('/updateZoomMeeting',[MeetingController::class,'updateZoomMeeting']);
