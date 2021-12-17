@@ -11,11 +11,15 @@ class Intern extends Model
 
     protected $table = "interns";
     protected $primaryKey = "intern_id";
-    protected $fillable = ['intern_id','intern_name','intern_department','intern_email'
+    protected $fillable = ['intern_id','intern_name','department_id','intern_email'
                           ,'intern_phone'];
 
     public function user(){
         return $this->belongsTo(User::class);
+    }
+
+    public function departments(){
+        return $this->belongsTo(Department::class);
     }
 
     public function payslips()
