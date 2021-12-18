@@ -24,4 +24,8 @@ class AssignTask extends Model
     {
         return $this->belongsToMany(Intern::class);
     }
+    public function Submit()
+    {
+        return $this->belongsToMany(SubmitTask::class);
+    }
 }
