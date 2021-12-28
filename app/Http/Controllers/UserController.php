@@ -26,61 +26,89 @@ class UserController extends Controller
 {
     // ----------------------- Calendar Event -----------------------------
 
+    // DISPLAY ALL CALENDAR EVENT
     public function viewAllCalendarEvent()
     {
-        $calendarEvents = CalendarEvent::all(); //-where('user_id',?);
+        // retrive all the calendar events of the user using cookies
+        $calendarEvents = CalendarEvent::all(); //-where('user_id',?); (use cookies to retrive user id)
+        if ($calendarEvents) {
+            // retreive total calendar event
+            $countEvents = $calendarEvents->count();
 
-        // retreive total calendar event
-        $countEvents = $calendarEvents->count();
-
-        return response()->json([
-            'calendarEvents' => $calendarEvents,
-            'countEvents' => $countEvents,
-        ]);
+            return response()->json([
+                'calendarEvents' => $calendarEvents,
+                'countEvents' => $countEvents,
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => "Calendar Event for the user not found!"
+            ]);
+        }
     }
 
+    // DISPLAY CALENDAR IN TIME RANGE EG: 2021-01-01 - 2021-03-01
     public function viewCalendarInTimeRange(Request $request)
     {
+        // MAKING TIME RANGE CONDITION
         $calendarEventsInTimeRange = CalendarEvent::where('event_start_time', '>=', $request->event_start_time)
             ->where('event_end_time', '<=', $request->event_end_time)
             ->get();
+        // where user id=?
 
-        $countMatchedEvents = count($calendarEventsInTimeRange);
+        if ($calendarEventsInTimeRange) {
+            // COUNT TOTAL EVENTS IN THIS TIME INTERVAL
+            $countMatchedEvents = count($calendarEventsInTimeRange);
 
-        return response()->json([
-            "calendar_events_in_time_range" => $calendarEventsInTimeRange,
-            "messages" => $countMatchedEvents . " have been found",
-        ]);
+            return response()->json([
+                "calendar_events_in_time_range" => $calendarEventsInTimeRange,
+                "messages" => $countMatchedEvents . " have been found",
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => "Calendar Event for the user not found!"
+            ]);
+        }
     }
 
-    public function viewNearCalendarEvent(Request $request)
+    // VIEW EVENTS WHICH IS NEARLY TO HAPPEN
+    public function viewUpcomingEvents(Request $request)
     {
         // check all the calendar event of the user using cookie
-        $calendarEvents = CalendarEvent::all();
+        $calendarEvents = CalendarEvent::all(); //where user id=?
 
-        // initialize arrau
-        $calendarEventNearDue = array(
-            'event_details' => [],
-            'event_due_time' => []
-        );
+        if ($calendarEvents) {
+            // initialize arrau, matched event will store into array
+            $calendarEventNearDue = array(
+                'event_details' => [],
+                'event_due_time' => []
+            );
 
-        foreach ($calendarEvents as $calendarEvent) {
-            $now = Carbon::parse(Carbon::now());
-            $event_end_time = Carbon::parse($calendarEvent->event_end_time);
-            $due = $now->diffInDays($event_end_time, false);
+            foreach ($calendarEvents as $calendarEvent) {
+                $now = Carbon::parse(Carbon::now());
+                $event_end_time = Carbon::parse($calendarEvent->event_end_time);
+                $due = $now->diffInDays($event_end_time, false);
 
-            // Check the due day search by user
-            if ($due < $request->due) {
-                array_push($calendarEventNearDue['event_details'], $calendarEvent);
-                array_push($calendarEventNearDue['event_due_time'], "The event ID " . $calendarEvent->calendar_event_id . " will be on due " . $due . " days");
+                // Calculate the day left for the event
+                if ($due < $request->due) {
+                    array_push($calendarEventNearDue['event_details'], $calendarEvent);
+                    array_push($calendarEventNearDue['event_due_time'], "The event ID " . $calendarEvent->calendar_event_id . " will be on due " . $due . " days");
+                }
             }
-        }
 
-        return response()->json([
-            'calendarEvent' => $calendarEventNearDue,
-        ]);
+            return response()->json([
+                'calendarEvent' => $calendarEventNearDue,
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => "Calendar Event for the user not found!"
+            ]);
+        }
     }
 
+    // FILTER EVENT FROM TWO CATEGORY (type_of_event , location)
     public function filterEvent(Request $request)
     {
         // retreive every column name
@@ -103,8 +131,9 @@ class UserController extends Controller
             }
         }
         // Check all the values which are matched
-        $filterEvent = CalendarEvent::where($filterCategory[0], $filterCategory[1])->get();
-
+        $filterEvent = CalendarEvent::where($filterCategory[0], $filterCategory[1])->get(); // where user id =?
+        // Eg: '/eventSort?category=Interview
+        
         return response()->json([
             'filterEvent' => $filterEvent,
             'status' => 200,
@@ -112,11 +141,15 @@ class UserController extends Controller
         ]);
     }
 
-    public function viewCalendarEventPlace(Request $request)
+    // RETURN GOOGLE MAP LOCATION FROM CLICKING EVENT LOCATION
+    public function viewCalendarEventPlace($id)
     {
-        return redirect()->away('https://www.google.com/maps/place/' . $request->address);
+        $location = CalendarEvent::find($id);
+
+        return redirect()->away('https://www.google.com/maps/place/' . $location->location);
     }
 
+    // ADD CALENDAR EVENT
     public function addCalendarEvent(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -126,7 +159,6 @@ class UserController extends Controller
             'event_end_time' => ['required|date_format:Y-m-d H:i:s'],
             'event_description' => ['required|text'],
             'location' => ['required|max:255'],
-            'meet_link' => ['meet_link|max:30']
         ]);
 
         if (($request->event_end_time < $request->event_start_time) || !($validator)) {
@@ -159,16 +191,16 @@ class UserController extends Controller
         }
     }
 
+    // MODIFY CALENDAR EVENT
     public function modifyCalendarEvent(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
             'event_title' => ['required|max:255'],
             'type_of_event' => ['required|char|size:1'],
             'event_start_time' => ['required|date_format:Y-m-d H:i:s'],
-            'event_end_time' => ['required|date_format:Y-m-d H:i:s'],
+            'event_end_time' => ['required|date_format:Y-m-d H:i:s|after:event_start_time'],
             'event_description' => ['required|text'],
             'event_location' => ['required|max:255'],
-            'meet_link' => ['meet_link|max:30']
         ]);
 
         if ($validator) {
@@ -202,6 +234,7 @@ class UserController extends Controller
         }
     }
 
+    // DELETE CALENDAR EVENT
     public function deleteCalendarEvent($id)
     {
         $deleteCalendarEvent = CalendarEvent::find($id);
@@ -221,6 +254,7 @@ class UserController extends Controller
         }
     }
 
+    // CALCULATE ATTENDANCE
     public function attendance($id)
     {
         // TO GET INTERN START DATE & END DATE
@@ -268,13 +302,24 @@ class UserController extends Controller
 
     // -------------------------- Calendar To Do List ------------------------------------
 
+    // VIEW CALENDAR TO DO LIST
     public function viewAllCalendarToDoLists()
     {
-        $calendarToDoList = CalendarToDoList::all();
+        $calendarToDoList = CalendarToDoList::all(); //where user_id=?
 
-        return response()->json(['calendarToDoList' => $calendarToDoList]);
+        if ($calendarToDoList){
+            return response()->json(['calendarToDoList' => $calendarToDoList]);
+        }
+        else{
+            return response()->json([
+                'status'=>400,
+                'message'=>"Cannot find calendar to do list!"
+            ]);
+        }
+      
     }
 
+    // ADD CALENDAR TO DO LIST
     public function addCalendarToDoList(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -284,12 +329,12 @@ class UserController extends Controller
             'task_status' => ['required|max:20'],
             'task_color' => ['required|char|size:1'],
             'start_time' => ['required|date_format:Y-m-d H:i:s'],
-            'deadline' => ['required|date_format:Y-m-d H:i:s']
+            'deadline' => ['required|date_format:Y-m-d H:i:s|after:start_time']
         ]);
 
         if ($validator) {
             $calendarToDoList = new CalendarToDoList();
-            $calendarToDoList->user_id = $request->user_id;
+            $calendarToDoList->user_id = $request->user_id; // use cookie
             $calendarToDoList->title = $request->title;
             $calendarToDoList->description = $request->description;
             $calendarToDoList->task_status = $request->task_status;
@@ -310,6 +355,7 @@ class UserController extends Controller
         }
     }
 
+    // MODIFY CALENDAR TO DO LIST
     public function modifyCalendarToDoList(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
@@ -352,6 +398,7 @@ class UserController extends Controller
         }
     }
 
+    // DELETE CALENDAR TO DO LIST
     public function deleteCalendarToDoList($id)
     {
         $deleteToDoList = CalendarToDoList::find($id);
@@ -366,10 +413,10 @@ class UserController extends Controller
 
     public function sortCalendarToDoListByColor(Request $request, $id)
     {
-        $toDoList = CalendarToDoList::find($id);
+        $list = CalendarToDoList::where('user_id', $id)->get();
 
-        if ($toDoList) {
-            $sort = $toDoList->where('color', $request->task_color)->get();
+        if ($list) {
+            $sort = $list->where('task_color', $request->task_color);
 
             return response()->json([
                 'status' => 200,
@@ -385,10 +432,10 @@ class UserController extends Controller
 
     public function sortCalendarToDoListByStatus(Request $request, $id)
     {
-        $toDoList = CalendarToDoList::find($id);
+        $list = CalendarToDoList::where('user_id', $id)->get();
 
-        if ($toDoList) {
-            $sort = $toDoList->where('status', $request->task_status)->get();
+        if ($list) {
+            $sort = $list->where('status', $request->task_status)->get();
 
             return response()->json([
                 'status' => 200,
@@ -402,10 +449,11 @@ class UserController extends Controller
         }
     }
 
+    // VIEW CALENDAR TO DO LIST NEAR DUE
     public function viewCalendarToDoListNearDue(Request $request)
     {
         // check all the calendar to do list of the user using cookie
-        $calendarToDoLists = CalendarToDoList::all();
+        $calendarToDoLists = CalendarToDoList::all(); // where user id =?
 
         // initialize arrau
         $calendarToDoListNearDue = array(
@@ -430,9 +478,10 @@ class UserController extends Controller
         ]);
     }
 
+    // GET WEATHER DATA FROM API
     public function getWeatherData(Request $request)
     {
-        $city_name = $request->city_name;
+        $city_name = $request->city_name; // FROM USER LOCATION COOKIES
         $api_key = config('services.openweather.key');
         $currentWeather = Http::get('http://api.openweathermap.org/data/2.5/weather?q=' . $city_name . '&appid=' . $api_key . '&units=metric');
 

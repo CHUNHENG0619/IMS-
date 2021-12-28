@@ -22,32 +22,44 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 // -------------------------- CALENDAR EVENT CRUD --------------------------
-Route::get('/calendar',[UserController::class,'viewAllCalendarEvent']);
-Route::post('/calendar/addCalendarEvent',[UserController::class,'addCalendarEvent']);
-Route::put('/calendar/modifyCalendarEvent/{id}',[UserController::class,'modifyCalendarEvent']);
-Route::delete('/calendar/deleteCalendarEvent/{id}',[UserController::class,'deleteCalendarEvent']);
+Route::get('/calendar', [UserController::class, 'viewAllCalendarEvent']);
+Route::post('/calendar/addCalendarEvent', [UserController::class, 'addCalendarEvent']);
+Route::put('/calendar/modifyCalendarEvent/{id}', [UserController::class, 'modifyCalendarEvent']);
+Route::delete('/calendar/deleteCalendarEvent/{id}', [UserController::class, 'deleteCalendarEvent']);
+// -------------------------- CALENDAR EVENT CRUD --------------------------
 
-Route::get('/calendar/eventSort',[UserController::class,'filterEvent']);
-Route::get('/calendar/address/{address}',[UserController::class,'viewCalendarEventPlace']);
-Route::get('/calendar/due',[UserController::class,'viewNearCalendarEvent']);
-Route::post('/calendar/viewCalendarInTimeRange',[UserController::class,'viewCalendarInTimeRange']);
-Route::get('/calendar/attendance/{id}',[UserController::class,'attendance']);
+
+// -------------------------- CALENDAR FEATURE --------------------------
+Route::get('/calendar/eventSort', [UserController::class, 'filterEvent']);
+Route::get('/calendar/eventLocation/{id}', [UserController::class, 'viewCalendarEventPlace']);
+Route::post('/calendar/viewUpcomingEvents', [UserController::class, 'viewUpcomingEvents']);
+Route::post('/calendar/viewCalendarInTimeRange', [UserController::class, 'viewCalendarInTimeRange']);
+Route::get('/calendar/attendance/{id}', [UserController::class, 'attendance']);
+// -------------------------- CALENDAR FEATURE --------------------------
+
 
 // -------------------------- CALENDAR TO DO LIST CRUD --------------------------
-Route::get('/calendarToDoLists',[UserController::class,'viewAllCalendarToDoLists']);
-Route::post('/calendarToDoLists/addCalendarToDoLists',[UserController::class,'addCalendarToDoList']);
-Route::put('/calendarToDoLists/modifyCalendarToDoLists/{id}',[UserController::class,'modifyCalendarToDoList']);
-Route::delete('/calendarToDoLists/deleteCalendarToDoLists/{id}',[UserController::class,'deleteCalendarToDoList']);
+Route::get('/calendarToDoLists', [UserController::class, 'viewAllCalendarToDoLists']);
+Route::post('/calendarToDoLists/addCalendarToDoLists', [UserController::class, 'addCalendarToDoList']);
+Route::put('/calendarToDoLists/modifyCalendarToDoLists/{id}', [UserController::class, 'modifyCalendarToDoList']);
+Route::delete('/calendarToDoLists/deleteCalendarToDoLists/{id}', [UserController::class, 'deleteCalendarToDoList']);
+// -------------------------- CALENDAR TO DO LIST CRUD --------------------------
 
-// // -------------------------- APPLY LEAVE --------------------------
-// Route::post('/calendar/applyLeave',[InternController::class,'applyLeave']);
-// Route::delete('/calendar/deleteApplyLeave/{id}',[InternController::class,'deleteApplyLeave']);
 
-// -------------------------- WEATHER --------------------------
-Route::get('/weather',[UserController::class,'getWeatherData']);
+// -------------------------- CALENDAR TO DO LIST FEATURE --------------------------
+Route::post('/calendarToDoLists/sortColor/{id}', [UserController::class, 'sortCalendarToDoListByColor']);
+Route::post('/calendarToDoLists/sortStatus/{id}', [UserController::class, 'sortCalendarToDoListByStatus']);
+Route::post('/calendarToDoLists/nearDue', [UserController::class, 'viewCalendarToDoListNearDue']);
+// -------------------------- CALENDAR TO DO LIST FEATURE --------------------------
 
-// -------------------------- ZOOM --------------------------
-Route::get('/viewZoomMeeting',[MeetingController::class,'list_meetings']);
-Route::post('/createZoomMeeting',[MeetingController::class,'createZoomMeeting']);
-Route::put('/updateZoomMeeting',[MeetingController::class,'updateZoomMeeting']);
-Route::delete('/deleteZoomMeeting',[MeetingController::class,'deleteZoomMeeting']);
+
+// -------------------------- WEATHER API --------------------------
+Route::get('/weather', [UserController::class, 'getWeatherData']);
+// -------------------------- WEATHER API --------------------------
+
+// -------------------------- ZOOM MEETING API--------------------------
+Route::get('/viewZoomMeeting', [MeetingController::class, 'list_meetings']);
+Route::post('/createZoomMeeting', [MeetingController::class, 'createZoomMeeting']);
+Route::put('/updateZoomMeeting/{meeting_id}', [MeetingController::class, 'updateZoomMeeting']);
+Route::delete('/deleteZoomMeeting/{meeting_id}', [MeetingController::class, 'deleteZoomMeeting']);
+// -------------------------- ZOOM MEETING API--------------------------

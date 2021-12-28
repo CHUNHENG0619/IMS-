@@ -3,13 +3,11 @@
 namespace App\Http\Controllers;
 
 require_once base_path('vendor/autoload.php');
-
 use \Firebase\JWT\JWT;
 use GuzzleHttp\Client as Http;
-
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 
+// REMEMBER TO INCLUDE JWT API AND SECRET IN ENV FILE
 define('ZOOM_API_KEY', config('services.zoom.key'));
 define('ZOOM_SECRET_KEY', config('services.zoom.secret'));
 
@@ -25,7 +23,7 @@ class MeetingController extends Controller
         return JWT::encode($payload, $key);
     }
 
-    function createZoomMeeting()
+    function createZoomMeeting(Request $request)
     {
         $client = new Http([
             'base_uri' => 'https://api.zoom.us',
@@ -33,24 +31,23 @@ class MeetingController extends Controller
 
         $response = $client->request('POST', '/v2/users/me/meetings', [
             "headers" => [
-                "Authorization" => "Bearer " . getZoomAccessToken()
+                "Authorization" => "Bearer " . $this->getZoomAccessToken()
             ],
             'json' => [
-                "topic" => "Meeting",
-                "type" => 2,
-                "start_time" => "2021-01-30T20:30:00",
-                "duration" => "30",
-                "password" => "123456"
+                "topic" => $request->topic,
+                "type" => $request->type, // 1 = INSTANT MEETING, 2 = SCHEDULED MEETING
+                "start_time" => $request->start_time, // FORMAT: 2021-12-31 23:59:59 Y-m-d H:i:s
+                "duration" => $request->duration, // DURATION IN MINUTES
+                "password" => $request->password
             ],
         ]);
 
         $data = json_decode($response->getBody());
-        echo "Join URL: " . $data->join_url;
-        echo "<br>";
-        echo "Meeting Password: " . $data->password;
+
+        return $data;
     }
 
-    function updateZoomMeeting($meeting_id)
+    function updateZoomMeeting(Request $request, $meeting_id)
     {
         $client = new Http([
             'base_uri' => "https://api.zoom.us",
@@ -58,14 +55,14 @@ class MeetingController extends Controller
 
         $response = $client->request('PATCH', '/v2/meetings/' . $meeting_id, [
             "headers" => [
-                "Authorization" => "Bearer" . getZoomAccessToken()
+                "Authorization" => "Bearer" . $this->getZoomAccessToken()
             ],
             "json" => [
-                "topic" => "Meeting",
-                "type" => 2,
-                "start_time" => "2022-01-03T10:30:00",
-                "duration" => "30",
-                "password" => "123456"
+                "topic" => $request->topic,
+                "type" => $request->type,
+                "start_time" => $request->start_time,
+                "duration" => $request->duration,
+                "password" => $request->password
             ],
 
         ]);
@@ -92,18 +89,22 @@ class MeetingController extends Controller
 
         $data = json_decode($response->getBody());
 
-        if (!empty($data)) {
-            foreach ($data->meetings as $d) {
-                $topic = $d->topic;
-                $join_url = $d->join_url;
-                echo "<h3>Topic: $topic</h3>";
-                echo "Join URL: $join_url";
-            }
+        return response()->json([
+            "data" => $data,
+        ]);
 
-            if (!empty($data->next_page_token)) {
-                list_meetings($data->next_page_token);
-            }
-        }
+        // Uncomment below codes if want to view the meeting details from controller here
+
+        // if (!empty($data)) {
+        //     foreach ($data->meetings as $d) {
+        //         echo "<h3>Topic: $d->topic</h3>";
+        //         echo "Join URL: $d->join_url";
+        //     }
+
+        //     if (!empty($data->next_page_token)) {
+        //         list_meetings($data->next_page_token);
+        //     }
+        // }
     }
 
     function deleteZoomMeeting($meeting_id)
@@ -115,12 +116,19 @@ class MeetingController extends Controller
 
         $response = $client->request("DELETE", "/v2/meetings/$meeting_id", [
             "headers" => [
-                "Authorization" => "Bearer " . getZoomAccessToken()
+                "Authorization" => "Bearer " . $this->getZoomAccessToken()
             ]
         ]);
 
+        // IF MEETING DELETED SUCCESSFULLY
         if (204 == $response->getStatusCode()) {
-            echo "Meeting deleted.";
+            return response()->json(['message', 'Meeting ID:' . $meeting_id . ' has been deleted.']);
+        }
+        else{
+            return response()->json([
+                'message'=>"Meeting is not deleted",
+                'status'=>404
+            ]);
         }
     }
 }
