@@ -10,12 +10,17 @@ class CreateSubmitTasksTable extends Migration
     {
         Schema::create('submit_tasks', function (Blueprint $table) {
             $table->id('submit_task_id');
+            $table->unsignedBigInteger('task_id');
             $table->unsignedBigInteger('staff_id');
             $table->unsignedBigInteger('intern_id');
             $table->string('intern_submitted_task',255)->nullable();
             $table->text('submitted_task_description');
             $table->timestamps();
 
+            $table->foreign('task_id')
+                ->references('task_id')
+                ->on('assign_tasks');
+            
             $table->foreign('staff_id')
                   ->references('staff_id')
                   ->on('staffs');

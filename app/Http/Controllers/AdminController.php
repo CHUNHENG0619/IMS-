@@ -2,99 +2,70 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\User;
-use App\Models\Admin;
 
+use Illuminate\Http\Request;
+use App\Models\Job;
+use Exception;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 class AdminController extends Controller
 {
-    public function addAdmin()
-    {
-    
-        $admin = new Admin();
-        $admin->admin_id = "3";
-        $admin->user_id = "2";
-        $admin->save();
-        return "Record has been add successfully!";
-    }
-
-    //Xirouh and Seaiyou part
-
-     //For announcement CRUD
-     public function ShowAnnouncement(){
-
-    }
-
-    public function ShowSelectAnnouncement($announcement_id){
-
-    }
-
-    public function CreateAnnouncement(){
-
-    }
-
-    public function UpdateAnnouncement(){
-
-    }
-
-    public function DeleteAnnouncement(){
-
-    }
-
     //For job CRUD
-    public function ShowJob(){
 
+    
+    public function ShowJob()
+    {
+        $jobs = Job::all();
+        return view('job', ['jobs' => $jobs]);
     }
 
-    public function ShowSelectJob($job_id){
-
-    }
-
-    public function CreateJob(){
-
-    }
-
-    public function UpdateJob(){
-
-    }
-
-    public function DeleteJob(){
-
-    }
-
-    //For payslip CRUD
-    public function ShowPayslip(){
-
-    }
-
-    public function ShowSelectPayslip($payslip_id){
-
-    }
-
-    public function CreatePayslip(){
-
-    }
-
-    public function UpdatePayslip(){
-
-    }
-
-    public function DeletePayslip(){
-
-    }
-
-    //View all job application and accept/reject
-    public function ViewJobApplication(){
-
-    }
-
-    //View all leave application and accept/reject
-    public function ViewLeaveApplied(){
-
-    }
-
-    //View calender
-    public function Calender(){
+    public function ShowSelectJob($job_id)
+    {
+        try{
+            $job = Job::findOrFail($job_id);
+        }catch(Exception $exception){
+            return view('errors.notfound',['error'=>$exception->getMessage()]);
+        }
         
+        return $job;
+    }
+
+    public function CreateJob(Request $request)
+    {
+        $request->validate([
+            'admin_id' => 'required',
+            'job_title' => 'required|max:255',
+            'job_department' => 'required|max:255',
+            'job_desc' => 'required',
+            'job_requirement' => 'required',
+            'job_type' => 'required|max:255',
+            'job_location' => 'required|max:255',
+            'salary' => 'required',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date',
+        ]);
+        
+        $job =Job::create($request->all());
+        return redirect('job');
+    }
+
+    public function UpdateJob(Request $request, $job_id)
+    {
+        try{
+            $job = Job::findOrFail($job_id);
+        }catch(Exception $exception){
+            return view('errors.notfound',['error'=>$exception->getMessage()]);
+        }
+        $job->update($request->all());
+        return $job;
+    }
+
+    public function DeleteJob($job_id)
+    {
+        try{
+            $job = Job::findOrFail($job_id);
+        }catch(Exception $exception){
+            return view('errors.notfound',['error'=>$exception->getMessage()]);
+        }
+        return $job;
     }
 }

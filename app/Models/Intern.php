@@ -10,11 +10,13 @@ class Intern extends Model
     use HasFactory;
 
     protected $table = "interns";
+    protected $primaryKey = "intern_id";
+    protected $fillable = [
+        'intern_id', 'user_id','intern_name', 'department_id', 'intern_email', 'intern_phone'
+    ];
 
-    protected $fillable = ['intern_id','intern_name','intern_department','intern_email'
-                          ,'intern_phone'];
-
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 
