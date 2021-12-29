@@ -36,6 +36,16 @@ Route::get('/users',function(){
     return view('users',['users' => $users]);
 });
 
+//
+Route::get('view_task',[InternController::class,'ViewTask'])->name('ViewTask');
+//select task
+Route::get('select/{task_id}',[InternController::class,'ViewSelectTask'])->name('ViewSelectTask');
+
+//submit
+Route::post('select/submit/{task_id}',[InternController::class,'SubmitTask'])->name('SubmitTask');
+//Delete submitted task
+Route::get('select/unsubmit/{task_id}',[InternController::class,'DeleteSubmittedTask']);
+
 Route::get('/add-user',[UserController::class,'addUser']);
 Route::get('/add-department',[DepartmentController::class,'addDepartment']);
 Route::get('/add-staff',[StaffController::class,'addStaff']);

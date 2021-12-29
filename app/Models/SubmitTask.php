@@ -12,7 +12,7 @@ class SubmitTask extends Model
     protected $table = "submit_tasks";
 
     protected $fillable = [
-        'submit_task_id', 'staff_id', 'intern_id', 'staff_id',
+        'submit_task_id', 'task_id', 'intern_id', 'staff_id',
         'intern_submitted_task', 'submitted_task_description'
     ];
 
@@ -25,4 +25,10 @@ class SubmitTask extends Model
     {
         return $this->belongsToMany(Intern::class);
     }
+
+    public function AssignTask()
+    {
+        return $this->belongsTo(AssignTask::class,'task_id');
+    }
+
 }
