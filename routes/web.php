@@ -1,16 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
-
-use App\Http\Controllers\StaffController;
-
 use App\Http\Controllers\AdminController;
-
-use App\Http\Controllers\InternController;
-
-use App\Http\Controllers\HomeController;
-
+use App\Http\Controllers\ApplyJobController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,25 +14,20 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-
-
-Route::get('/users',function(){
-    $users = DB::table('users')->get();
-    return view('users',['users' => $users]);
+Route::get('/', function () {
+    return view('welcome');
 });
 
-Auth::routes();
+Route::view('/home','home');
+
+Route::get('/job',[AdminController::class,'ShowJob']);
+
+Route::get('/job/{id}',[AdminController::class,'ShowSelectJob']);
+
+Route::post('/job',[AdminController::class,'CreateJob']);
 
 
-// Route::resource('/admin{id}',AdminController::class)->middleware('role:admin');
-// Route::resource('/intern{id}',InternController::class)->middleware('role:intern');
-// Route::resource('/staff{id}',StaffController::class)->middleware('role:staff');
-// Route::resource('/user{id}',UserController::class)->middleware('role:user');
+Route::get('/job/delete/{id}',[AdminController::class,'DeleteJob']);
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
-
-Route::get('admin/home', [HomeController::class, 'adminHome'])->name('admin.home')->middleware('role');
-Route::get('staff/home', [HomeController::class, 'staffHome'])->name('staff.home')->middleware('role');
-Route::get('intern/home', [HomeController::class, 'internHome'])->name('intern.home')->middleware('role');
-
-
+Route::get('/apply/{id}',[ApplyJobController::class,'ApplyForm']);
+Route::post('/apply/{id}',[ApplyJobController::class,'NewApplication']);
