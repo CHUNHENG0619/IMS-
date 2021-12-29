@@ -23,4 +23,59 @@ class ApplyLeaveController extends Controller
         $applyleave->save();
         return "Record has been add successfully!";
     }
+
+    public function viewApplyLeave(){
+        $applyLeave = ApplyLeave::all();
+        if($applyLeave){
+            return response()->json([
+                'status'=>200,
+                'applyLeave'=>$applyLeave,
+            ]);
+        }else{
+            return response()->json([
+                'status'=>404,
+                'message'=>'applyLeave no found',
+            ]);
+        }
+    }
+
+    public function detailApplyLeave($leave_id){
+        $applyLeave= ApplyLeave::find($leave_id);
+        if($applyLeave){
+            return response()->json([
+                'status'=>200,
+                'applyLeave'=>$applyLeave,
+            ]);
+        }else{
+            return response()->json([
+                'status'=>404,
+                'message'=>'applyLeave no found',
+            ]);
+        }
+    }
+
+    public function updateApplyLeave(Request $request, $leave_id){
+        $applyLeave = ApplyLeave::find($leave_id);
+        if($applyLeave){
+            if($applyLeave->status != 'Accept' && $applyLeave->status != 'Reject'){
+                $applyLeave->status = $request->status;
+                $applyLeave->update();
+
+                return response()->json([
+                    'status'=>200,
+                    'message'=>'Successfully',
+                ]);
+            }else{
+                return response()->json([
+                    'status'=>200,
+                    'message'=>'ApplyLeave already processed',
+                ]);
+            }
+        }else{
+            return response()->json([
+                'status'=>404,
+                'message'=>'ApplyLeave no found',
+            ]);
+        }
+    }
 }
