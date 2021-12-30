@@ -129,7 +129,7 @@
                                 <th>Phone</th> 
                                 <th>Edit</th>
                                 <th>Delete</th>
-                                <th>Apply Leave</th>
+                                 
                             </tr>
                         </thead>
                         <tbody>
