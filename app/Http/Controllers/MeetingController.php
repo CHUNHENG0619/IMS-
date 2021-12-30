@@ -13,6 +13,12 @@ define('ZOOM_SECRET_KEY', config('services.zoom.secret'));
 
 class MeetingController extends Controller
 {
+    // ------------------ JWT TOKEN ------------------
+    public function __construct()
+    {
+        $this->middleware('auth:api');
+    }
+
     function getZoomAccessToken()
     {
         $key = ZOOM_SECRET_KEY;

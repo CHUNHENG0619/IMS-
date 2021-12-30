@@ -2,56 +2,29 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\DepartmentController;
-use App\Http\Controllers\StaffController;
-use App\Http\Controllers\CalendarToDoListController;
-use App\Http\Controllers\CalendarEventController;
-use App\Http\Controllers\EducationController;
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\FAQController;
-use App\Http\Controllers\ContactUsController;
-use App\Http\Controllers\ImprovementController;
-use App\Http\Controllers\JobController;
-use App\Http\Controllers\JobApplicationController;
-use App\Http\Controllers\PayslipController;
-use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\InternController;
-use App\Http\Controllers\InternDetailController;
-use App\Http\Controllers\AssignTaskController;
-use App\Http\Controllers\ApplyLeaveController;
+use App\Http\Controllers\MeetingController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+// -------------------------- CALENDAR EVENT CRUD --------------------------
+Route::get('/calendar',[UserController::class,'viewAllCalendarEvent']);
+Route::post('/calendar/addCalendarEvent',[UserController::class,'addCalendarEvent']);
+Route::put('/calendar/modifyCalendarEvent/{id}',[UserController::class,'modifyCalendarEvent']);
+Route::delete('/calendar/deleteCalendarEvent/{id}',[UserController::class,'deleteCalendarEvent']);
 
-Route::get('/users',function(){
-    $users = DB::table('users')->get();
-    return view('users',['users' => $users]);
-});
+Route::get('/calendar/eventSort',[UserController::class,'filterEvent']);
+Route::get('/calendar/address/{address}',[UserController::class,'viewCalendarEventPlace']);
+Route::get('/calendar/due',[UserController::class,'viewNearCalendarEvent']);
+Route::post('/calendar/viewCalendarInTimeRange',[UserController::class,'viewCalendarInTimeRange']);
+Route::get('/calendar/attendance/{id}',[UserController::class,'attendance']);
 
-Route::get('/add-user',[UserController::class,'addUser']);
-Route::get('/add-department',[DepartmentController::class,'addDepartment']);
-Route::get('/add-staff',[StaffController::class,'addStaff']);
-Route::get('/add-calendartodolist',[CalendarToDoListController::class,'addCalendarToDoList']);
-Route::get('/add-calendarevent',[CalendarEventController::class,'addCalendarEvent']);
-Route::get('/add-education',[EducationController::class,'addEducation']);
-Route::get('/add-admin',[AdminController::class,'addAdmin']);
-Route::get('/add-payslip',[PayslipController::class,'addPayslip']);
-Route::get('/add-faq',[FAQController::class,'addFAQ']);
-Route::get('/add-contactus',[ContactUsController::class,'addContactUs']);
-Route::get('/add-improvement',[ImprovementController::class,'addImprovement']);
-Route::get('/add-applyleave',[ApplyLeaveController::class,'addApplyLeave']);
-Route::get('/add-assigntask',[AssignTaskController::class,'addAssignTask']);
-Route::get('/add-intern',[InternController::class,'addIntern']);
-Route::get('/add-interndetail',[InternDetailController::class,'addInternDetail']);
-Route::get('/add-job',[JobController::class,'addJob']);
-Route::get('/add-jobapplication',[JobApplicationController::class,'addJobApplication']);
-Route::get('/add-announcement',[AnnouncementController::class,'addAnnouncement']);
+// -------------------------- CALENDAR TO DO LIST CRUD --------------------------
+Route::get('/calendarToDoLists',[UserController::class,'viewAllCalendarToDoLists']);
+Route::post('/calendarToDoLists/addCalendarToDoLists',[UserController::class,'addCalendarToDoList']);
+Route::put('/calendarToDoLists/modifyCalendarToDoLists/{id}',[UserController::class,'modifyCalendarToDoList']);
+Route::delete('/calendarToDoLists/deleteCalendarToDoLists/{id}',[UserController::class,'deleteCalendarToDoList']);
 
+Route::view('/calendarEvent','calendarEvent');
+
+// // --------------------------- APPLY LEAVE ------------------------------------
+// Route::post('/calendar/applyLeave',[InternController::class,'applyLeave']);
+// Route::delete('/calendar/deleteApplyLeave/{id}',[InternController::class,'deleteApplyLeave']);

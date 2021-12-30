@@ -20,27 +20,36 @@ use App\Models\Admin;
 use App\Models\Intern;
 use App\Models\Holiday;
 use App\Models\InternDetail;
-
+use Tymon\JWTAuth;
 
 class UserController extends Controller
 {
+    private $user;
+
+    public function __construct()
+    {
+        $this->middleware('auth:api');
+        $user = auth()->user()->user_id;
+    }
     // ----------------------- Calendar Event -----------------------------
 
     // DISPLAY ALL CALENDAR EVENT
     public function viewAllCalendarEvent()
     {
         // retrive all the calendar events of the user using cookies
-        $calendarEvents = CalendarEvent::all(); //-where('user_id',?); (use cookies to retrive user id)
+        $calendarEvents = CalendarEvent::all()->where('user_id', $this->user); //-where('user_id',?); (use cookies to retrive user id)
         if ($calendarEvents) {
             // retreive total calendar event
             $countEvents = $calendarEvents->count();
 
             return response()->json([
+                'user' => auth()->user(),
                 'calendarEvents' => $calendarEvents,
                 'countEvents' => $countEvents,
             ]);
         } else {
             return response()->json([
+                'user' => auth()->user(),
                 'status' => 404,
                 'message' => "Calendar Event for the user not found!"
             ]);
@@ -53,6 +62,7 @@ class UserController extends Controller
         // MAKING TIME RANGE CONDITION
         $calendarEventsInTimeRange = CalendarEvent::where('event_start_time', '>=', $request->event_start_time)
             ->where('event_end_time', '<=', $request->event_end_time)
+            ->where('user_id', $this->user)
             ->get();
         // where user id=?
 
@@ -76,7 +86,7 @@ class UserController extends Controller
     public function viewUpcomingEvents(Request $request)
     {
         // check all the calendar event of the user using cookie
-        $calendarEvents = CalendarEvent::all(); //where user id=?
+        $calendarEvents = CalendarEvent::all()->where('user_id', $this->user); //where user id=?
 
         if ($calendarEvents) {
             // initialize arrau, matched event will store into array
@@ -131,9 +141,9 @@ class UserController extends Controller
             }
         }
         // Check all the values which are matched
-        $filterEvent = CalendarEvent::where($filterCategory[0], $filterCategory[1])->get(); // where user id =?
+        $filterEvent = CalendarEvent::where($filterCategory[0], $filterCategory[1])->where('user_id', $this->user)->get(); // where user id =?
         // Eg: '/eventSort?category=Interview
-        
+
         return response()->json([
             'filterEvent' => $filterEvent,
             'status' => 200,
@@ -175,7 +185,7 @@ class UserController extends Controller
             }
         } else {
             $calendarEvent = new CalendarEvent;
-            $calendarEvent->user_id = $request->user_id;
+            $calendarEvent->user_id = $this->user;
             $calendarEvent->event_title = $request->event_title;
             $calendarEvent->type_of_event = $request->type_of_event;
             $calendarEvent->event_start_time = $request->event_start_time;
@@ -305,25 +315,22 @@ class UserController extends Controller
     // VIEW CALENDAR TO DO LIST
     public function viewAllCalendarToDoLists()
     {
-        $calendarToDoList = CalendarToDoList::all(); //where user_id=?
+        $calendarToDoList = CalendarToDoList::all()->where('user_id', $this->user);
 
-        if ($calendarToDoList){
+        if ($calendarToDoList) {
             return response()->json(['calendarToDoList' => $calendarToDoList]);
-        }
-        else{
+        } else {
             return response()->json([
-                'status'=>400,
-                'message'=>"Cannot find calendar to do list!"
+                'status' => 400,
+                'message' => "Cannot find calendar to do list!"
             ]);
         }
-      
     }
 
     // ADD CALENDAR TO DO LIST
     public function addCalendarToDoList(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'user_id' => ['required'],
             'title' => ['required|max:255'],
             'description' => ['required|char|size:1'],
             'task_status' => ['required|max:20'],
@@ -334,7 +341,7 @@ class UserController extends Controller
 
         if ($validator) {
             $calendarToDoList = new CalendarToDoList();
-            $calendarToDoList->user_id = $request->user_id; // use cookie
+            $calendarToDoList->user_id = $this->user;
             $calendarToDoList->title = $request->title;
             $calendarToDoList->description = $request->description;
             $calendarToDoList->task_status = $request->task_status;
@@ -359,7 +366,6 @@ class UserController extends Controller
     public function modifyCalendarToDoList(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
-            'user_id' => ['required'],
             'title' => ['required|max:255'],
             'description' => ['required|char|size:1'],
             'task_status' => ['required|max:20'],
@@ -411,9 +417,9 @@ class UserController extends Controller
         ]);
     }
 
-    public function sortCalendarToDoListByColor(Request $request, $id)
+    public function sortCalendarToDoListByColor(Request $request)
     {
-        $list = CalendarToDoList::where('user_id', $id)->get();
+        $list = CalendarToDoList::where('user_id', $this->user)->get();
 
         if ($list) {
             $sort = $list->where('task_color', $request->task_color);
@@ -432,7 +438,7 @@ class UserController extends Controller
 
     public function sortCalendarToDoListByStatus(Request $request, $id)
     {
-        $list = CalendarToDoList::where('user_id', $id)->get();
+        $list = CalendarToDoList::where('user_id', $this->user)->get();
 
         if ($list) {
             $sort = $list->where('status', $request->task_status)->get();
@@ -453,7 +459,7 @@ class UserController extends Controller
     public function viewCalendarToDoListNearDue(Request $request)
     {
         // check all the calendar to do list of the user using cookie
-        $calendarToDoLists = CalendarToDoList::all(); // where user id =?
+        $calendarToDoLists = CalendarToDoList::where('user_id', $this->user); // where user id =?
 
         // initialize arrau
         $calendarToDoListNearDue = array(
@@ -481,7 +487,8 @@ class UserController extends Controller
     // GET WEATHER DATA FROM API
     public function getWeatherData(Request $request)
     {
-        $city_name = $request->city_name; // FROM USER LOCATION COOKIES
+        //$city_name = $request->city_name; // FROM USER LOCATION COOKIES
+        $city_name = auth()->user()->address; // FROM USER LOCATION COOKIES
         $api_key = config('services.openweather.key');
         $currentWeather = Http::get('http://api.openweathermap.org/data/2.5/weather?q=' . $city_name . '&appid=' . $api_key . '&units=metric');
 
