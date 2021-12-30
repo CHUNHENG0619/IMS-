@@ -11,6 +11,7 @@ class CreateInternDetailsTable extends Migration
         Schema::create('intern_details', function (Blueprint $table) {
             $table->id('intern_detail_id');
             $table->unsignedBigInteger('intern_id');
+            $table->unsignedBigInteger('job_id');
             $table->date('time_to_start');
             $table->date('time_to_end');
             $table->string('resume',255)->nullable();
@@ -24,6 +25,10 @@ class CreateInternDetailsTable extends Migration
             $table->foreign('intern_id')
                   ->references('intern_id')
                   ->on('interns');
+
+            $table->foreign('job_id')
+                  ->references('job_id')
+                  ->on('jobs');
         });
     }
 

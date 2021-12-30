@@ -43,4 +43,13 @@ Route::get('admin/home', [HomeController::class, 'adminHome'])->name('admin.home
 Route::get('staff/home', [HomeController::class, 'staffHome'])->name('staff.home')->middleware('role');
 Route::get('intern/home', [HomeController::class, 'internHome'])->name('intern.home')->middleware('role');
 
+Route::post('admin/home',[AdminController::class,'CreatePayslip']);
+Route::get('show-payslip',[AdminController::class,'ShowPayslip']);
+Route::get('edit-payslip/{payslip_id}',[AdminController::class,'ShowSelectPayslip']);
+Route::put('update-payslip/{payslip_id}',[AdminController::class,'UpdatePayslip']);
+Route::delete('delete-payslip/{payslip_id}',[AdminController::class,'DeletePayslip'])->name("delete.payslip");
 
+/*
+Route::get('admin/payslip-history',[AdminController::class,'PayslipHistory']);
+Route::get('show-payslip-history',[AdminController::class,'ShowPayslipHistory']);
+*/

@@ -18,6 +18,7 @@ class Payslip extends Model
     }
 
     public function interns(){
-        return $this->belongsTo(Intern::class);
+        return $this->belongsTo(Intern::class,'payslip_id','intern_id');
     }
+
 }

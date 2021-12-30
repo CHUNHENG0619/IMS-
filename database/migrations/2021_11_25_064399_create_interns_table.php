@@ -12,7 +12,7 @@ class CreateInternsTable extends Migration
             $table->id('intern_id');
             $table->unsignedBigInteger('user_id');
             $table->string('intern_name',255);
-            $table->string('intern_department',255);
+            $table->unsignedBigInteger('department_id');
             $table->string('intern_email',60)->unique();
             $table->string('intern_phone',20);
             $table->timestamps();
@@ -20,6 +20,10 @@ class CreateInternsTable extends Migration
             $table->foreign('user_id')
                   ->references('user_id')
                   ->on('users');
+               
+            $table->foreign('department_id')
+                  ->references('department_id')
+                  ->on('departments');      
         });
     }
 

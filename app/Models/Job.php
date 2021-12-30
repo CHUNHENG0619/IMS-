@@ -11,7 +11,7 @@ class Job extends Model
 
     protected $table = "jobs";
 
-    protected $fillable = ['job_id','admin_id','job_title','job_desc','job_requirement','job_type'
+    protected $fillable = ['job_id','admin_id','job_title','job_department','job_desc','job_requirement','job_type'
                           ,'job_location','salary','start_date','end_date'];
 
     public function admins(){
@@ -22,4 +22,9 @@ class Job extends Model
     {
         return $this->hasMany(JobApplication::class);
     }
+
+    public function internDetails()(){
+        return $this->belongsTo(InternDetail::class,'intern_details_id','job_id');
+    }
+
 }

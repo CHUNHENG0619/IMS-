@@ -19,13 +19,13 @@ class InternSeeder extends Seeder
         $faker = \Faker\Factory::create();
 
         $user_id = User::all()->pluck('user_id');
-        $department_name = Department::all()->pluck('department_name');
+        $department_id = Department::all()->pluck('department_id');
        
         for ($i=0;$i<10;$i++){
             Intern::create([
                 'user_id' => $faker->randomElement($user_id),
                 'intern_name'=>$faker->name,
-                'intern_department'=>$faker->randomElement($department_name),
+                'department_id'=>$faker->randomElement($department_id),
                 'intern_email'=>$faker->email,
                 'intern_phone'=>$faker->phoneNumber
             ]);

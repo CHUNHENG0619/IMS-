@@ -11,7 +11,7 @@ class Intern extends Model
 
     protected $table = "interns";
 
-    protected $fillable = ['intern_id','intern_name','intern_department','intern_email'
+    protected $fillable = ['intern_id','user_id','intern_name','department_id','intern_email'
                           ,'intern_phone'];
 
     public function user(){
@@ -20,7 +20,7 @@ class Intern extends Model
 
     public function payslips()
     {
-        return $this->hasMany(Payslip::class);
+        return $this->hasMany(Payslip::class,'intern_id','payslip_id');
     }
 
     public function applyLeaves()
@@ -35,7 +35,7 @@ class Intern extends Model
 
     public function internDetails()
     {
-        return $this->hasOne(InternDetail::class);
+        return $this->hasOne(InternDetail::class,'intern_id','intern_details_id');
     }
 
     public function assignTasks()
