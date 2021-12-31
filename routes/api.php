@@ -71,4 +71,14 @@ Route::group([
     Route::put('/updateZoomMeeting/{meeting_id}', [MeetingController::class, 'updateZoomMeeting']);
     Route::delete('/deleteZoomMeeting/{meeting_id}', [MeetingController::class, 'deleteZoomMeeting']);
     // -------------------------- ZOOM MEETING API--------------------------
+
+
+    // -------------------------- Intern Profile API--------------------------
+    Route::get('intern/{intern_id}',[userProfileController::class, 'ViewProfile']);
+    Route::put('update-intern/{intern_id}', [userProfileController::class, 'updateProfile']);
+    // -------------------------- Payslip  API--------------------------
+    Route::get('payslip/{payslip_id}',[userProfileController::class, 'viewPaySlip']);
+    // -------------------------- Education  API--------------------------
+    Route::get('education/{edu_id}',[userProfileController::class, 'viewEducation']);
+    Route::put('update-education/{edu_id}', [userProfileController::class, 'educationUpdate']);
 });
