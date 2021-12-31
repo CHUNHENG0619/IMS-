@@ -44,4 +44,6 @@ Route::get('admin/home', [HomeController::class, 'adminHome'])->name('admin.home
 Route::get('staff/home', [HomeController::class, 'staffHome'])->name('staff.home')->middleware('role');
 Route::get('intern/home', [HomeController::class, 'internHome'])->name('intern.home')->middleware('role');
 
+Route::resource('task', StaffController::class);
+
 
