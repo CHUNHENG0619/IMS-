@@ -22,6 +22,80 @@ use App\Http\Controllers\HomeController;
 |
 */
 
+Route::get('header', function () {
+    return view('includes.header');
+});
+
+Route::get('footer', function () {
+    return view('includes.footer');
+});
+
+Route::get('applyjob', function () {
+    return view('guest.applyjob');
+});
+
+Route::get('joblist', function () {
+    return view('guest.joblist');
+});
+
+Route::get('jobdetails', function () {
+    return view('guest.jobdetails');
+});
+
+
+
+Route::get('faq', function () {
+    return view('guest.faq');
+});
+
+Route::get('aboutus', function () {
+    return view('guest.aboutus');
+});
+
+Route::get('contactus', function () {
+    return view('guest.contactus');
+});
+
+Route::get('homepage', function () {
+    return view('guest.homepage');
+});
+
+Route::get('login', function () {
+    return view('guest.login');
+});
+
+Route::get('register', function () {
+    return view('guest.register');
+});
+
+Route::get('viewtask', function () {
+    return view('intern.viewtask');
+});
+
+Route::get('submittask', function () {
+    return view('intern.submittask');
+});
+
+Route::get('sidebar', function () {
+    return view('intern.sidebar');
+});
+
+Route::get('leaveform', function () {
+    return view('intern.leaveform');
+});
+
+
+Route::get('leavelist', function () {
+    return view('intern.leavelist');
+});
+
+Route::get('viewProfile', function () {
+    return view('intern.viewProfile');
+});
+
+Route::get('editProfile', function () {
+    return view('intern.editProfile');
+});
 
 
 
